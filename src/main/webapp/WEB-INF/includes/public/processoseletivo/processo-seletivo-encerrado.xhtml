@@ -1,0 +1,48 @@
+<ui:composition xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui">
+
+    <p:outputPanel autoUpdate="true">
+        <p:repeat var="processo" value="#{controllerListaProcessoSeletivo.paginatorListEncerrados.model}">
+            <p:link outcome="detalhe-processo-seletivo">
+                <p:panel style="min-height: 90px;">
+                    <div class="ui-g">
+                        <div class="ui-g-3 ui-md-2 ui-lg-1" align="center">
+                            <i class="icon-doc-text-inv Fs50 Wid20 leaden"/>
+                        </div>
+                        <div class="ui-g-9 ui-md-10 ui-lg-11">
+                            <div class="Fs24 MarTop10 Wid80 Fleft leaden">#{processo.descricao}</div>
+                        </div>
+                    </div>
+                </p:panel>
+
+                <f:param name="processo" value="#{processo.id}"/>
+            </p:link>
+
+            <div class="EmptyBox10"/>
+        </p:repeat>
+
+        <div align="center">
+            <p:outputPanel
+                    rendered="#{not empty controllerListaProcessoSeletivo.paginatorListEncerrados.model and controllerListaProcessoSeletivo.listaProcessoSeletivoEncerrado.size() ge 7}">
+                <p:commandButton value="&lt;"
+                                 actionListener="#{controllerListaProcessoSeletivo.paginatorListEncerrados.prev}"
+                                 update="dtAndamentos"/>
+                <h:outputText style="margin-left: 5px;"
+                              value="#{controllerListaProcessoSeletivo.paginatorListEncerrados.pageIndex} / #{controllerListaProcessoSeletivo.paginatorListEncerrados.pages}"/>
+                <p:commandButton value="&gt;" style="margin-left: 5px;"
+                                 actionListener="#{controllerListaProcessoSeletivo.paginatorListEncerrados.next}"
+                                 update="dtAndamentos"/>
+                <h:inputHidden value="#{controllerListaProcessoSeletivo.paginatorListEncerrados.pageIndex}"/>
+            </p:outputPanel>
+        </div>
+
+        <p:outputLabel style="font-weight: bold; font-size: 14px;"
+                       rendered="#{empty controllerListaProcessoSeletivo.paginatorListEncerrados.model}"
+                       value="Nenhum processo seletivo encerrado..."/>
+
+    </p:outputPanel>
+
+</ui:composition>

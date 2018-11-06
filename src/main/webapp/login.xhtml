@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" >
+
+	<h:head>
+		<title>Suporte Simetrya - Acesso</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<link rel="shortcut icon" type="image/x-icon" href="#{resource['images/logo-simetrya.png']}" />	
+	</h:head>
+
+	<h:outputStylesheet library="css" name="sistema.css" />
+	<h:outputStylesheet library="sentinel-layout" name="css/font-icon-layout.css" />
+	<h:outputStylesheet library="sentinel-layout" name="css/sentinel-layout.css" />
+	<h:outputStylesheet library="sentinel-layout" name="css/core-layout.css"/>
+	
+	<h:outputScript library="sentinel-layout" name="js/login.js" />
+		
+	<h:body class="fontRegular white-back" >
+		
+		<div class="Container" >
+			<div class="Container80 MaxWid500 Fnone MarAuto TexAlCenter PaddingTopPercent10">
+	            <a href="http://www.simetrya.com.br/" id="login-logo" target="_blank" >
+	                <span class="Fs30 FontTitilliumSemiBoldItalic Fleft"><span class="softblue">Suporte</span><span class="hardblue">Simetrya</span></span>
+	            </a>
+	            <div class="EmptyBox10"></div>
+	        </div>
+			
+			<h:form>
+				<p:messages closable="true" autoUpdate="true" styleClass="Container80 MaxWid500 white-back Fnone MarAuto BordRad10" />
+			</h:form>
+			
+	        <div class="Container80 MaxWid500 white-back Fnone MarAuto BordRad10" id="login-box">
+	            <div class="Container">
+              		<div class="Container100 TexAlCenter Animated05 BoxSizeBorder TabBtn left TabBtnActiveLeft" id="login" role="1">
+	                    <div class="Container80 Fnone MarAuto FontBold"><i class="icon-login-1"></i> Login</div>
+	                </div>
+	
+	                <!-- Tab Login -->
+	                <div class="Container90 Fnone MarAuto TexAlCenter TabContent OvHidden" id="TAB1">
+	                    <h:form id="formLogin" prependId="false" >
+	                    
+		                    <div class="EmptyBox50" />
+		                    
+		                    <p:focus for="username" />
+		                 	<p:inputText id="username" label="Usuário" styleClass="Container80 Fnone MarAuto Fs18"
+		                 		maxlength="120" placeholder="Usuário" pt:required="required" >
+		                 		<f:validateBean disabled="true"/>
+		                 	</p:inputText>
+		                    
+		                    <div class="EmptyBox10" />
+		                    
+		                    <p:password id="password" maxlength="100"
+		                    	styleClass="Container80 Fnone MarAuto Fs18" placeholder="Senha" pt:required="required" />
+		                    
+		                    <div class="EmptyBox20" />
+		                    
+		                    <div class="EmptyBox30" />
+		                    
+		                    <p:commandButton value="Entrar" ajax="false" styleClass="Fs16"
+		                    	update="@form" action="#{controllerLogin.entrar()}" />
+		                    
+		                    <div class="EmptyBox50" />
+	                    </h:form>
+	                </div>
+	            </div>
+	        </div>
+		</div>
+	</h:body>
+</html>

@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ps="http://primefaces.org/sentinel"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:menuitem id="cad_pagina_inicial" value="Home" icon="icon-home-outline"
+		outcome="/candidato/pagina-inicial" containerStyleClass="layout-menubar-active" />
+		
+	<p:submenu id="scad_perfil" label="Perfil" icon="icon-sliders">
+		<p:menuitem id="sm_meus_dados" value="Meus Dados"
+			icon="icon-clipboard" outcome="/candidato/perfil/meus-dados" />
+	
+		<p:menuitem id="cad_senha_acesso" value="Senha de Acesso"
+			icon="icon-lock-filled" outcome="/candidato/perfil/senha-acesso" />
+	</p:submenu>
+
+	<p:menuitem id="cad_inscricao" value="Inscrição" icon="icon-link"
+		outcome="/candidato/inscricao/cadastro-inscricao" />
+
+	<p:menuitem id="cad_recursos" value="Recursos" icon="icon-doc-text-inv"
+		outcome="/candidato/recurso/cadastro-recurso" />
+
+	<p:menuitem id="cad_local_prova" value="Local de Prova"
+		icon="icon-location-2"
+		outcome="/candidato/localprova/consulta-local-prova" />
+
+	<p:menuitem id="cad_resultados" value="Resultados"
+		icon="icon-ok-squared" outcome="/candidato/resultado/visualizar" />
+		
+</ui:composition>

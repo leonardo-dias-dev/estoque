@@ -1,0 +1,89 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" lang="pt-br">
+
+<h:head>
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+	</f:facet>
+
+	<title><ui:insert name="titulo">SECITEC - Seleção</ui:insert></title>
+
+	<h:outputStylesheet library="sentinel-layout"
+		name="css/font-icon-layout.css" />
+	<h:outputStylesheet library="sentinel-layout"
+		name="css/sentinel-layout.css" />
+	<h:outputStylesheet library="sentinel-layout"
+		name="css/core-layout.css" />
+	<h:outputStylesheet library="css" name="sistema.css" />
+
+	<h:outputScript library="js" name="localeData.js" />
+	<h:outputScript library="js" name="busca-cep.js" />
+	<h:outputScript library="sentinel-layout" name="js/layout.js" />
+
+	<ui:insert name="head" />
+</h:head>
+
+<h:body class="white-back">
+	<script type="text/javascript">
+		function configurarTelefone() {
+			$('.telefone').mask("?(99) 9999-99999", {reverse: true}).focusout(function (event) {
+			      var target, phone, element;
+	
+			      target = (event.currentTarget) ? event.currentTarget : event.srcElement;
+			      phone = target.value.replace(/\D/g, '');
+			      element = $(target);
+			      element.unmask();
+			      
+			      if (phone.length > 10) {
+			          element.mask("?(99) 99999-9999", {reverse: true});
+			      } else {
+			          element.mask("?(99) 9999-99999", {reverse: true});
+			      }
+			 });
+		}
+
+		$(document).ready(function() {
+			configurarTelefone();
+		});
+	</script>
+
+	<ui:include src="topbar.xhtml" />
+
+	<ui:include src="leftmenu.xhtml" />
+
+	<div id="layout-portlets-cover" class="fontRegular">
+		<div class="Container">
+			<h:form>
+				<p:breadCrumb styleClass="sim-ajuste-breadCrumb">
+					<p:menuitem value="Home"
+						url="#{request.isUserInRole('ADMINISTRADOR') ? '/admin/pagina-inicial.xhtml' : '/candidato/pagina-inicial.xhtml'}" />
+					<ui:insert name="breadcrumb" />
+				</p:breadCrumb>
+			</h:form>
+		</div>
+
+		<ui:insert name="content" />
+		<ui:insert name="footer" />
+	</div>
+
+	<!-- <ui:include src="/dialog/arquivo.xhtml" /> -->
+
+	<p:ajaxStatus
+		style="width:32px; height:32px; position:fixed; right:12px; bottom:10px">
+		<f:facet name="start">
+			<p:graphicImage name="images/preloader.gif" library="sentinel-layout" />
+		</f:facet>
+
+		<f:facet name="complete">
+			<h:outputText value="" />
+		</f:facet>
+	</p:ajaxStatus>
+</h:body>
+</html>

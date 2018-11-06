@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui" >
+	
+	<p:outputPanel rendered="#{empty controllerDetalheProcessoSeletivo.listaPublicacoesOficiais}">
+	      Não há publicações oficiais...
+	</p:outputPanel>
+
+	<p:repeat value="#{controllerDetalheProcessoSeletivo.listaPublicacoesOficiais}" var="pub">
+		<p:link target="_blank" href="https://s3-sa-east-1.amazonaws.com/secitec.simetrya.public/#{pub.descricao}">
+			<p:outputPanel>
+				<i class="fa fa-file-pdf-o Red Fs25" />
+				<h:outputText style="margin-left: 20px;" value="#{pub.titulo}" styleClass="descricao-edital" />
+			</p:outputPanel>
+		</p:link>
+		<div class="EmptyBox5" />
+	</p:repeat>
+	
+</ui:composition>

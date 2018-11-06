@@ -1,0 +1,80 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui" >
+	
+	<p:messages id="messages" showDetail="false" closable="true" autoUpdate="true"/>
+	
+	<div class="ui-g ui-fluid" >
+		<div class="ui-g-12 ui-md-6 ui-lg-6" >
+			<p:outputLabel value="Local de Prova" styleClass="Fs14" />
+			<p:selectOneMenu id="localProva" styleClass="mar-top-label"
+				value="#{controllerConsultarInscricoes.localProvaSelecionado}" >
+				<f:selectItem noSelectionOption="true"/>
+				<f:selectItems value="#{controllerLocalProva.buscarTodos}" var="local"
+					itemLabel="#{local.descricao}" itemValue="#{local}"/>
+				
+				<p:ajax event="change" process="@this" update="@form:multiCarDetail" />
+			</p:selectOneMenu>
+		</div>
+	</div>
+	
+	<div class="ui-g ui-fluid" >
+		<div class="ui-g-12 ui-md-4 ui-lg-4" >
+			<p:outputLabel value="Logradouro" styleClass="Fs14" />
+			<p:inputText styleClass="mar-top-label" disabled="true"
+				value="#{controllerConsultarInscricoes.localProvaSelecionado.nomeLogradouro}" />
+		</div>
+		<div class="ui-g-12 ui-md-4 ui-lg-4" >
+			<p:outputLabel value="Número" styleClass="Fs14" />
+			<p:inputText styleClass="mar-top-label" disabled="true"
+				value="#{controllerConsultarInscricoes.localProvaSelecionado.numeroLogradouro}" />
+		</div>
+		<div class="ui-g-12 ui-md-4 ui-lg-4" >
+			<p:outputLabel value="Complemento" styleClass="Fs14" />
+			<p:inputText styleClass="mar-top-label" disabled="true"
+				value="#{controllerConsultarInscricoes.localProvaSelecionado.complemento}" />
+		</div>
+	</div>
+	
+	<div class="ui-g ui-fluid" >
+		<div class="ui-g-12 ui-md-6 ui-lg-6" >
+			<p:outputLabel value="Município" styleClass="Fs14" />
+			<p:inputText styleClass="mar-top-label" disabled="true"
+				value="#{controllerConsultarInscricoes.localProvaSelecionado.municipio.nome}" />
+		</div>
+		<div class="ui-g-12 ui-md-6 ui-lg-6" >
+			<p:outputLabel value="UF" styleClass="Fs14" />
+			<p:inputText styleClass="mar-top-label" disabled="true"
+				value="#{controllerConsultarInscricoes.localProvaSelecionado.municipio.uf.sigla}" />
+		</div>
+	</div>
+	
+	<div class="ui-g ui-fluid" >
+		<div class="ui-g-12 ui-md-6 ui-lg-6" >
+			<p:outputLabel value="Sala" styleClass="Fs14" />
+			<p:inputText styleClass="mar-top-label" disabled="#{controllerConsultarInscricoes.localProvaSelecionado == null}"
+				value="#{controllerConsultarInscricoes.sala}" />
+		</div>
+		<div class="ui-g-12 ui-md-6 ui-lg-6" >
+			<p:outputLabel value="Data/Hora" styleClass="Fs14" />
+			<p:calendar locale="pt_BR" pattern="dd/MM/yyyy HH:mm:ss" mask="true"
+				styleClass="mar-top-label" disabled="#{controllerConsultarInscricoes.localProvaSelecionado == null}"
+				value="#{controllerConsultarInscricoes.dataHoraProva}" />
+		</div>
+	</div>
+	
+	<div class="EmptyBox20" />
+	
+	<div class="ui-g ui-fluid" >
+		<div class="ui-g-12 ui-md-4 ui-lg-4" />
+		<div class="ui-g-12 ui-md-4 ui-lg-4" >
+			<p:commandButton id="buttonSave2" value="Salvar"
+				action="#{controllerConsultarInscricoes.lancarLocalProvaColetivo()}" />
+		</div>
+		<div class="ui-g-12 ui-md-4 ui-lg-4" />
+	</div>
+	
+</ui:composition>

@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: estoque
+Build-Branch: 
+Implementation-Version: 1.8.0
+Build-Timestamp: 31/10/2018 17:36:39 UTC
+Built-By: leonardo.dias
+Build-Revision: 
+Implementation-Vendor-Id: br.com.simetrya
+Build-Jdk: 1.8.0_161
+Created-By: Maven Integration for Eclipse
+

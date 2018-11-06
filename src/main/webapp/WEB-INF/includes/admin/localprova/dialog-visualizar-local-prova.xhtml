@@ -1,0 +1,74 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ps="http://primefaces.org/sentinel"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<div class="ui-g" >
+		<div class="ui-g-12 ui-md-12 ui-lg-12" >
+			<span class="FontBold Fs20 sim-text-color-blue">
+				<i class="icon-info-circled" />
+				Detalhes do Local de Prova
+			</span>
+		</div>
+	</div>
+	
+	<div class="ui-g" >
+		<div class="ui-g-12 ui-md-12 ui-lg-12 Fs15" >
+			<h:outputText value="Descrição" styleClass="FontBold" />
+			<div class="EmptyBox5" />
+			<h:outputText value="#{controllerConsultaLocalProva.localProvaVisualizar.descricao}" />
+		</div>
+	</div>
+	
+	<div class="ui-g Fs15" >
+		<div class="ui-g-12 ui-md-12 ui-lg-8" >
+			<h:outputText value="Logradouro" styleClass="FontBold" />
+			<div class="EmptyBox5" />
+			<h:outputText value="#{controllerConsultaLocalProva.localProvaVisualizar.nomeLogradouro}" />
+		</div>
+		<div class="ui-g-12 ui-md-12 ui-lg-2" >
+			<h:outputText value="Número" styleClass="FontBold" />
+			<div class="EmptyBox5" />
+			<h:outputText rendered="#{not empty controllerConsultaLocalProva.localProvaVisualizar.numeroLogradouro}" value="#{controllerConsultaLocalProva.localProvaVisualizar.numeroLogradouro}" />
+			<h:outputText rendered="#{empty controllerConsultaLocalProva.localProvaVisualizar.numeroLogradouro}" value="S/N" />
+		</div>
+		<div class="ui-g-12 ui-md-12 ui-lg-2" >
+			<h:outputText value="Cep" styleClass="FontBold" />
+			<div class="EmptyBox5" />
+			<h:outputText value="#{controllerConsultaLocalProva.localProvaVisualizar.cep}" >
+				<f:converter converterId="converterCep" />
+			</h:outputText>
+		</div>
+	</div>
+	
+	<div class="ui-g Fs15" >
+		<div class="ui-g-12 ui-md-12 ui-lg-6" >
+			<h:outputText value="Complemento" styleClass="FontBold" />
+			<div class="EmptyBox5" />
+			<h:outputText value="#{controllerConsultaLocalProva.localProvaVisualizar.complemento}" />
+		</div>
+		<div class="ui-g-12 ui-md-12 ui-lg-3" >
+			<h:outputText value="Município" styleClass="FontBold" />
+			<div class="EmptyBox5" />
+			<h:outputText value="#{controllerConsultaLocalProva.localProvaVisualizar.municipio.nome}" />
+		</div>
+		<div class="ui-g-12 ui-md-12 ui-lg-3" >
+			<h:outputText value="UF" styleClass="FontBold" />
+			<div class="EmptyBox5" />
+			<h:outputText value="#{controllerConsultaLocalProva.localProvaVisualizar.municipio.uf.sigla}" />
+		</div>
+	</div>
+	
+	<div class="EmptyBox15" />
+	
+	<div class="ui-g ui-fluid" >
+		<div class="ui-g-12 ui-md-4 ui-lg-5" />
+		<div class="ui-g-12 ui-md-4 ui-lg-2" >
+			<p:button value="Fechar" onclick="PF('detalheLocalProva').hide(); return false;" />
+		</div>
+		<div class="ui-g-12 ui-md-4 ui-lg-5" />
+	</div>
+	
+</ui:composition>

@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ps="http://primefaces.org/sentinel"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<p:menuitem id="adm_pagina_inicial" value="Home" icon="icon-home-outline"
+		outcome="/admin/pagina-inicial" containerStyleClass="layout-menubar-active" />
+
+	<p:menuitem id="adm_processo_seletivo" value="Processo Seletivo"
+		icon="icon-doc-text-1" outcome="/admin/processos/consulta-processo-seletivo" />
+		
+	<p:menuitem id="adm_arquivo" value="Arquivos"
+		icon="icon-file-pdf" outcome="/admin/arquivo/consulta-arquivo" />
+
+	<p:menuitem id="adm_local_prova" value="Local de Prova"
+		icon="icon-location" outcome="/admin/localprova/consulta-local-prova" />
+
+	<p:menuitem id="adm_inscricao" value="Inscrições" icon="icon-doc-text"
+		outcome="/admin/inscricao/consultar-inscricao" />
+
+	<p:menuitem id="adm_perfil_profissional" value="Perfil Profissional"
+		icon="icon-vcard" outcome="/admin/perfilprofissional/consulta-perfil-profissional" />
+
+	<p:menuitem id="adm_polo" value="Polo" icon="icon-building"
+		outcome="/admin/polo/consulta-polo" />
+
+	<p:menuitem id="adm_usuario" value="Usuário" icon="icon-user-2"
+		rendered="#{request.isUserInRole('ADMINISTRADOR')}"
+		outcome="/admin/administrador/consultar-administrador" />
+	
+	<p:menuitem id="adm_sobre" value="Sobre" icon="icon-info"
+		outcome="/admin/sobre" />
+
+</ui:composition>

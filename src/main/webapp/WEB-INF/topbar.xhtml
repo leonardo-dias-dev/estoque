@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui">
+
+    <div id="layout-header" class="Unselectable fontRegular">
+
+        <p:link outcome="#{request.isUserInRole('ADMINISTRADOR') ? '/admin/pagina-inicial.xhtml' : '/candidato/pagina-inicial.xhtml'}">
+            <h:graphicImage style="padding:7px 5px;" library="images" styleClass="Fleft" name="logoMT.gif"
+                            width="40px"/>
+
+            <div id="layout-logo">
+            <span class="Fs19 FontTitilliumSemiBoldItalic Fleft" style="margin: 0 5px;">
+            	<span class="softblue">SECITEC</span>
+            </span>
+            </div>
+        </p:link>
+
+        <ul id="sm-topmenu" class="layout-header-widgets white Fs14">
+            <li class="Fleft BordRadHalf TexAlCenter Animated05">
+                <ui:fragment rendered="#{request.isUserInRole('CANDIDATO')}">
+                    <a href="${request.contextPath}/candidato/appLogout" class="white Unselectable" title="Sair">
+                        <i class="icon-logout"/>
+                    </a>
+                </ui:fragment>
+
+                <ui:fragment rendered="#{request.isUserInRole('ADMINISTRADOR') or request.isUserInRole('OPERADOR')}">
+                    <a href="${request.contextPath}/admin/appLogout" class="white Unselectable" title="Sair">
+                        <i class="icon-logout"/>
+                    </a>
+                </ui:fragment>
+            </li>
+        </ul>
+        <!-- NEVER REMOVE FOLLOWING 'UL' TAG ! BECAUSE THIS CONTAINS RESPONSIVE MODE HEADER MENU OPEN-CLOSE BUTTON -->
+        <ul id="sm-mobiletopmenu" class="layout-header-widgets white Fs14">
+            <li class="Fleft BordRadHalf TexAlCenter Animated05 DisplayOnResponsive"><i class="icon-th-1"></i></li>
+        </ul>
+        <!-- ****** -->
+    </div>
+
+</ui:composition>

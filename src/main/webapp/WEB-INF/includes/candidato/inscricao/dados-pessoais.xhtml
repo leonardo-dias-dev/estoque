@@ -1,0 +1,193 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:remoteCommand name="rc" process="@this, subView1:hiddenDOMs" actionListener="#{controllerMeusDados.carregarUFeMunicipioVIACEP}" />
+
+    <script>
+        function searchCEPandCompleteDOM(){
+            pesquisacep();
+            setTimeout(rc, 1000)
+        }
+    </script>
+
+    <p:focus context="@form"/>
+   
+    <div class="ui-g">
+        <div class="ui-g-12 ui-md-12 ui-lg-6">
+            <p:outputLabel value="Nome" for="campoNome" styleClass="Fs14"/>
+            <p:inputText id="campoNome" styleClass="mar-top-label"
+                         required="true" requiredMessage="Informe seu nome completo"
+                         value="#{controllerMeusDados.usuario.nome}"/>
+        </div>
+        <div class="ui-g-12 ui-md-6 ui-lg-3">
+            <p:outputLabel value="CPF" for="campoCpf" styleClass="Fs14"/>
+            <p:inputMask id="campoCpf" mask="999.999.999-99" disabled="true"
+                         styleClass="mar-top-label"
+                         value="#{controllerMeusDados.usuario.cpf}">
+                <f:converter converterId="converterCpf"/>
+            </p:inputMask>
+        </div>
+        <div class="ui-g-12 ui-md-6 ui-lg-3">
+            <p:outputLabel value="RG" for="campoRg" styleClass="Fs14"/>
+            <p:inputMask id="campoRg" mask="9999999-9" styleClass="mar-top-label"
+                         required="true" requiredMessage="Informe seu RG"
+                         value="#{controllerMeusDados.usuario.rg}">
+                <f:converter converterId="converterRg"/>
+            </p:inputMask>
+        </div>
+    </div>
+    
+	<div class="ui-g">
+		<div class="ui-g-12 ui-md-4 ui-lg-4">
+			<p:outputLabel value="Órgão Expedidor" for="campoOrgaoExpedidor" styleClass="Fs14"/>
+			<p:inputText id="campoOrgaoExpedidor" styleClass="mar-top-label" maxlength="10"
+				required="true" requiredMessage="Informe o Órgão Expedidor"
+				value="#{controllerMeusDados.usuario.orgaoExpedidor}" />
+		</div>
+		<div class="ui-g-12 ui-md-4 ui-lg-4">
+			<p:outputLabel value="UF Emissor RG" for="campoUfEmissorRg" styleClass="Fs14"/>
+			<p:selectOneMenu id="campoUfEmissorRg" styleClass="mar-top-label"
+			                 required="true" requiredMessage="Informe a UF de Emissão do RG"
+			                 value="#{controllerMeusDados.usuario.ufEmissorRg}">
+			    <f:selectItem noSelectionOption="true"/>
+			    <f:selectItems value="#{controllerMeusDados.listaUf}" var="uf"
+			                   itemValue="#{uf}" itemLabel="#{uf.nome}"/>
+			</p:selectOneMenu>
+		</div>
+		<div class="ui-g-12 ui-md-4 ui-lg-4">
+			<p:outputLabel value="Data de Nascimento" for="campoDataNascimento" styleClass="Fs14"/>
+			<div class="SimEmptyBox3"/>
+			<p:calendar id="campoDataNascimento" locale="pt" showOn="button"
+			            accesskey="true" mask="true" pattern="dd/MM/yyyy" required="true"
+			            requiredMessage="Informe a Data de Nascimento"
+			            value="#{controllerMeusDados.usuario.dataNascimento}"/>
+		</div>
+	</div>
+	
+	<div class="ui-g">
+		<div class="ui-g-12 ui-md-12 ui-lg-6">
+			<p:outputLabel value="Nome do Pai" for="campoNomePai" styleClass="Fs14"/>
+			<p:inputText id="campoNomePai" styleClass="mar-top-label" maxlength="255"
+				required="true" requiredMessage="Informe o Nome do Pai"
+				value="#{controllerMeusDados.usuario.nomePai}" />
+		</div>
+		<div class="ui-g-12 ui-md-12 ui-lg-6">
+			<p:outputLabel value="Nome da Mãe" for="campoNomeMae" styleClass="Fs14"/>
+			<p:inputText id="campoNomeMae" styleClass="mar-top-label" maxlength="255"
+				required="true" requiredMessage="Informe o Nome da Mãe"
+				value="#{controllerMeusDados.usuario.nomeMae}" />
+		</div>
+	</div>
+
+    <div class="ui-g">
+        <p:outputPanel id="hiddenDOMs">
+            <h:inputHidden id="uf" value="#{controllerMeusDados.ufVIACEP}"/>
+            <h:inputHidden id="ibge" value="#{controllerMeusDados.codigoIBGE}"/>
+            <h:inputHidden id="cidade" value="..."/>
+        </p:outputPanel>
+
+        <div class="ui-g-12 ui-md-5 ui-lg-2">
+            <p:outputLabel value="CEP" for="cep" styleClass="Fs14"/>
+            <p:inputText id="cep" onblur="searchCEPandCompleteDOM()" requiredMessage="Informe o CEP" required="true"
+                         value="#{controllerMeusDados.usuario.cep}"
+                         styleClass="mar-top-label" size="10"
+                         maxlength="9"/>
+        </div>
+
+        <div class="ui-g-12 ui-md-5 ui-lg-5">
+            <p:outputLabel value="Logradouro" for="rua" styleClass="Fs14"/>
+            <p:inputText id="rua" styleClass="mar-top-label" required="true"
+                         requiredMessage="Informe seu Endereço"
+                         value="#{controllerMeusDados.usuario.nomeLogradouro}"/>
+        </div>
+        <div class="ui-g-12 ui-md-2 ui-lg-2">
+            <p:outputLabel value="Número" for="campoNumero" styleClass="Fs14"/>
+            <p:inputText id="campoNumero" styleClass="mar-top-label"
+                         value="#{controllerMeusDados.usuario.numeroLogradouro}"/>
+        </div>
+        <div class="ui-g-12 ui-md-5 ui-lg-3">
+            <p:outputLabel value="Bairro" for="bairro" styleClass="Fs14"/>
+            <p:inputText id="bairro" widgetVar="bairro" styleClass="mar-top-label" required="true"
+                         requiredMessage="Informe o bairro"
+                         value="#{controllerMeusDados.usuario.bairro}"/>
+        </div>
+    </div>
+
+    <div class="ui-g">
+        <div class="ui-g-5">
+            <p:outputLabel value="Complemento" styleClass="Fs14"/>
+            <p:inputText id="campoComplemento" styleClass="mar-top-label"
+                         value="#{controllerMeusDados.usuario.complemento}"/>
+        </div>
+
+        <div class="ui-g-12 ui-md-6 ui-lg-3">
+            <p:outputLabel value="UF" for="ufAlter" styleClass="Fs14"/>
+            <p:selectOneMenu id="ufAlter" styleClass="mar-top-label" required="true"
+                             requiredMessage="Informe a UF do Estado"
+                             value="#{controllerMeusDados.ufSelecionado}">
+                <f:selectItem noSelectionOption="true"/>
+                <f:selectItems value="#{controllerMeusDados.listaUf}" var="ufc"
+                               itemValue="#{ufc}" itemLabel="#{ufc.nome}"/>
+                <p:ajax update="cityAlter"
+                        listener="#{controllerMeusDados.carregarMunicipio()}"/>
+            </p:selectOneMenu>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-4">
+            <p:outputLabel value="Município" for="cityAlter" styleClass="Fs14"/>
+            <p:selectOneMenu id="cityAlter" styleClass="mar-top-label"
+                             required="true" requiredMessage="Informe o Município"
+                             disabled="#{empty controllerMeusDados.listaMunicipio}"
+                             value="#{controllerMeusDados.usuario.municipio}">
+                <f:selectItem noSelectionOption="true"/>
+                <f:selectItems value="#{controllerMeusDados.listaMunicipio}"
+                               var="municipio" itemValue="#{municipio}"
+                               itemLabel="#{municipio.nome}"/>
+            </p:selectOneMenu>
+        </div>
+    </div>
+
+    <div class="ui-g">
+        <div class="ui-g-12 ui-md-4 ui-lg-4">
+            <p:outputLabel value="Telefone Celular" for="campoTelefoneCelular"
+                           styleClass="Fs14"/>
+            <p:inputText id="campoTelefoneCelular"
+                         styleClass="mar-top-label telefone"
+                         value="#{controllerMeusDados.usuario.telefoneCelular}">
+                <f:converter converterId="converterTelefone"/>
+            </p:inputText>
+        </div>
+        <div class="ui-g-12 ui-md-4 ui-lg-4">
+            <p:outputLabel value="Telefone Fixo" for="campoTelefoneFixo"
+                           styleClass="Fs14"/>
+            <p:inputText id="campoTelefoneFixo"
+                         styleClass="mar-top-label telefone"
+                         value="#{controllerMeusDados.usuario.telefoneFixo}">
+                <f:converter converterId="converterTelefone"/>
+            </p:inputText>
+        </div>
+        <div class="ui-g-12 ui-md-4 ui-lg-4">
+            <p:outputLabel value="E-mail" for="campoEmail" styleClass="Fs14"/>
+            <p:inputText id="campoEmail" styleClass="mar-top-label"
+                         required="true"
+                         requiredMessage="Informe pelo menos um E-mail válido"
+                         value="#{controllerMeusDados.usuario.email}">
+            </p:inputText>
+        </div>
+    </div>
+
+    <div class="EmptyBox5"/>
+
+    <div class="ui-g">
+        <div class="ui-g-12 ui-md-8 ui-lg-10"/>
+        <div class="ui-g-12 ui-md-4 ui-lg-2">
+            <p:commandButton value="Próximo" update="@form"
+                             actionListener="#{controllerCadastroInscricao.podeMostrarProcessoSeletivo}"
+                             action="#{controllerMeusDados.update}">
+            </p:commandButton>
+        </div>
+    </div>
+
+</ui:composition>
