@@ -21,7 +21,7 @@ public class AuthenticationSucessHandlerImpl implements AuthenticationSuccessHan
 	}
 
 	private String getLocation(HttpServletRequest httpServletRequest) {
-		return String.format("%s/admin/pagina-inicial.xhtml", httpServletRequest.getContextPath());
+		return String.format("%s/home.xhtml", httpServletRequest.getContextPath());
 	}
 
 }

@@ -24,7 +24,7 @@ public class AuthenticationFailureHandlerImpl implements AuthenticationFailureHa
 	}
 
 	private String getLocation(HttpServletRequest httpServletRequest, AuthenticationException authenticationException) {
-		return String.format("%s/admin/login.xhtml?%s=true", httpServletRequest.getContextPath(), authenticationException.getMessage());
+		return String.format("%s/login.xhtml?%s=true", httpServletRequest.getContextPath(), authenticationException.getMessage());
 	}
 
 }

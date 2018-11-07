@@ -23,7 +23,7 @@ import org.springframework.web.filter.GenericFilterBean;
 import veterinaria.estoque.seguranca.handler.AuthenticationFailureHandlerImpl;
 import veterinaria.estoque.seguranca.handler.AuthenticationSucessHandlerImpl;
 import veterinaria.estoque.seguranca.handler.LogoutSuccessHandlerImpl;
-import veterinaria.estoque.seguranca.provider.AuthenticationProviderLdapImpl;
+import veterinaria.estoque.seguranca.provider.AuthenticationProviderJdbcImpl;
 import veterinaria.estoque.util.exceptions.MeuSecurityConfigException;
 
 @Configuration
@@ -41,42 +41,43 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private AuthenticationSucessHandlerImpl authenticationSucessHandlerImpl;
 
 	@Autowired
-	@Qualifier("authLDAP")
-	private AuthenticationProviderLdapImpl authenticationProviderLdapImpl;
+	@Qualifier("authDB")
+	private AuthenticationProviderJdbcImpl authenticationProviderJdbcImpl;
 
 	@Autowired
 	public void configureGlobalAuthDB(AuthenticationManagerBuilder authenticationManagerBuilder) throws MeuSecurityConfigException {
 		try {
-			authenticationManagerBuilder.authenticationProvider(authenticationProviderLdapImpl);
+			authenticationManagerBuilder.authenticationProvider(authenticationProviderJdbcImpl);
 		} catch (Exception e) {
 			throw new MeuSecurityConfigException("Nao foi possivel iniciar o provedor de autenticacao do Spring Security", e);
 		}
 	}
 
 	@Override
-	protected void configure(HttpSecurity http) throws MeuSecurityConfigException {
+	protected void configure(HttpSecurity httpSecurity) throws MeuSecurityConfigException {
 		try {
-			http.csrf().disable().headers().frameOptions().sameOrigin();
+			httpSecurity.csrf().disable().headers().frameOptions().sameOrigin();
 
-			http = adicionarRegrasAsPaginas(http);
-			http
+			httpSecurity = adicionarRegrasAsPaginas(httpSecurity);
+			
+			httpSecurity
 				.formLogin()
 					.loginProcessingUrl("/appLogin")
 					.loginPage("/login.xhtml")
 					.successHandler(authenticationSucessHandlerImpl)
 					.failureHandler(authenticationFailureHandlerImpl);
-			http
+			httpSecurity
 				.logout()
 					.logoutUrl("/appLogout")
 					.logoutSuccessHandler(logoutSuccessHandlerImpl)
 					.invalidateHttpSession(true)
 					.deleteCookies("JSESSIONID");
 
-			http
+			httpSecurity
 				.exceptionHandling()
 					.accessDeniedPage("/access-denied.xhtml");
 
-			http
+			httpSecurity
 				.sessionManagement()
 					.invalidSessionUrl("/login.xthml?invalidSessionUrl=true")
 					.sessionAuthenticationErrorUrl("/login.xhtml?sessionError=true")
@@ -84,16 +85,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.sessionRegistry(getSessionRegistry())
 					.expiredUrl("/login.xthml?expired=true");
 
-			http.httpBasic();
-			http.addFilterAfter(authenticationFilter(), BasicAuthenticationFilter.class);
+			httpSecurity.httpBasic();
+			httpSecurity.addFilterAfter(authenticationFilter(), BasicAuthenticationFilter.class);
 		} catch (Exception e) {
 			throw new MeuSecurityConfigException("Nao foi possivel iniciar as configuracoes do Spring security", e);
 		}
 	}
 
-	private HttpSecurity adicionarRegrasAsPaginas(HttpSecurity http) throws MeuSecurityConfigException {
+	private HttpSecurity adicionarRegrasAsPaginas(HttpSecurity httpSecurity) throws MeuSecurityConfigException {
 		try {
-			http.authorizeRequests()
+			httpSecurity.authorizeRequests()
 					// Qualquer um acessa a pagina de login
 					.antMatchers("/login.xhtml").permitAll()
 
@@ -104,17 +105,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					// NEGADO OUTRAS URL's
 					.anyRequest().denyAll();
 			
-			return http;
+			return httpSecurity;
 		} catch (Exception e) {
 			throw new MeuSecurityConfigException("Não foi possivel adicionar as permissões para as URL's do sistema", e);
 		}
 	}
 
 	@Override
-	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/resources/**").antMatchers("/javax.faces.resource/**").antMatchers("/error.xhtml")
-				.antMatchers("/404.xhtml").antMatchers("/api/v1/**") // FIXME
-				.antMatchers("/ImpressaoServlet");
+	public void configure(WebSecurity webSecurity) throws Exception {
+		webSecurity.ignoring()
+			.antMatchers("/resources/**")
+			.antMatchers("/javax.faces.resource/**")
+			.antMatchers("/error.xhtml")
+			.antMatchers("/404.xhtml");
 	}
 
 	@Bean(name = "messageDigestPasswordEncoder")
@@ -137,10 +140,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return new AuthenticationFilterImpl();
 	}
 	
-//	@Bean
-//    public JndiObjectFactoryBean myBean() {
-//        JndiObjectFactoryBean factory = new JndiObjectFactoryBean();
-//        factory.setJndiName("java:global/simetryacloud/SingletonTipoAutenticacao");
-//        return factory;
-//    }
 }

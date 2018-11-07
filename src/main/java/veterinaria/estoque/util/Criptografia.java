@@ -2,6 +2,8 @@ package veterinaria.estoque.util;
 
 import java.security.MessageDigest;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
 import veterinaria.estoque.util.exceptions.ManipulationException;
 
 public class Criptografia {
@@ -46,6 +48,17 @@ public class Criptografia {
 			return hexString.toString();
 		} catch (Exception e) {
 			throw new ManipulationException("Falha ao tentar criptograr a senha em MD5", e);
+		}
+	}
+	
+	public static void main(String[] args) {
+		try {
+			String criptografiaSHA256 = Criptografia.criptografiaSHA256("123123");
+			
+			System.out.println(criptografiaSHA256);
+		} catch (ManipulationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

@@ -16,9 +16,15 @@ public class LogoutSuccessHandlerImpl implements LogoutSuccessHandler {
 
 	@Override
 	public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
+		String location = getLocation(httpServletRequest);
+		
 		httpServletResponse.setStatus(HttpStatus.OK.value());
-		httpServletResponse.sendRedirect(String.format("%s/login.xhtml", httpServletRequest.getContextPath()));
+		httpServletResponse.sendRedirect(location);
 		httpServletResponse.getWriter().flush();
+	}
+	
+	private String getLocation(HttpServletRequest httpServletRequest) {
+		return String.format("%s/home.xhtml", httpServletRequest.getContextPath());
 	}
 	
 }
