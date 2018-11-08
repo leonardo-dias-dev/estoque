@@ -203,6 +203,11 @@
 			<url>http://repository.primefaces.org</url>
 			<layout>default</layout>
 		</repository>
+		
+		<repository>
+			<id>lib</id>
+			<url>file:${project.basedir}/lib</url>
+		</repository>
 	</repositories>
 
 	<build>
@@ -239,4 +244,36 @@
 			</plugin>
 		</plugins>
 	</build>
+	
+	<profiles>
+		<!-- [install libs] Goals: clean Profiles: install-libs -->
+		<profile>
+			<id>install-libs</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-install-plugin</artifactId>
+						<version>2.5.2</version>
+						<executions>
+							<execution>
+								<id>install-sentinel</id>
+								<phase>clean</phase>
+								<goals>
+									<goal>install-file</goal>
+								</goals>
+								<configuration>
+									<file>${basedir}/lib/sentinel-theme-2.1.1.jar</file>
+									<groupId>org.primefaces.premium</groupId>
+									<artifactId>sentinel-theme</artifactId>
+									<version>2.1.1</version>
+									<packaging>jar</packaging>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
