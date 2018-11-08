@@ -203,11 +203,6 @@
 			<url>http://repository.primefaces.org</url>
 			<layout>default</layout>
 		</repository>
-		
-		<repository>
-			<id>lib</id>
-			<url>file:${project.basedir}/lib</url>
-		</repository>
 	</repositories>
 
 	<build>
