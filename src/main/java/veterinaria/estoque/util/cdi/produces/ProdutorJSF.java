@@ -65,24 +65,5 @@ public class ProdutorJSF {
 
 		return usuarioSpring.getCandidato();
 	}*/
-	
-/*	@Produces
-	@QAdministradorAutenticado
-	private Administrador createAdministrador() {
-		Principal principal = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal();
-		UsuarioAutenticado usuarioSpring = null;
-
-		if (principal instanceof UsernamePasswordAuthenticationToken) {
-			UsernamePasswordAuthenticationToken auth = (UsernamePasswordAuthenticationToken) principal;
-
-			usuarioSpring = (UsuarioAutenticado) auth.getPrincipal();
-		} else if (principal instanceof RememberMeAuthenticationToken) {
-			RememberMeAuthenticationToken auth = (RememberMeAuthenticationToken) principal;
-
-			usuarioSpring = (UsuarioAutenticado) auth.getPrincipal();
-		}
-
-		return usuarioSpring.getAdministrador();
-	}*/
 
 }

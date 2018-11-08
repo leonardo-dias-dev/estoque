@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.RequestDispatcher;
@@ -14,13 +14,15 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
 @Named
-@RequestScoped
+@ViewScoped
 public class ControllerLogin implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
 	private FacesContext facesContext;
+	
+	private String usuario;
 	
 	@PostConstruct
 	public void init() {
@@ -47,6 +49,14 @@ public class ControllerLogin implements Serializable {
 		RequestDispatcher requestDispatcher = servletRequest.getRequestDispatcher("/appLogout");
 		
 		requestDispatcher.forward(servletRequest, servletResponse);
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 
 }

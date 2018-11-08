@@ -27,7 +27,7 @@ import veterinaria.estoque.seguranca.provider.AuthenticationProviderJdbcImpl;
 import veterinaria.estoque.util.exceptions.MeuSecurityConfigException;
 
 @Configuration
-@ComponentScan(basePackages="veterinaria.estoque", basePackageClasses=veterinaria.estoque.util.UtilRegistroSessao.class)
+@ComponentScan(basePackages="veterinaria.estoque.seguranca", basePackageClasses=veterinaria.estoque.util.UtilRegistroSessao.class)
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 

@@ -14,7 +14,7 @@ public class ServiceAcessoSistema implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	public void validarSenha(Usuario usuario, String senha) throws AcessoException {
-		if (usuario.getSenha().equals(senha)) {
+		if (!usuario.getSenha().equals(senha)) {
 			throw new AcessoException(UtilMessageProvider.getValue("usuario-invalido", "messages-acesso-sistema"));
 		}
 	}
