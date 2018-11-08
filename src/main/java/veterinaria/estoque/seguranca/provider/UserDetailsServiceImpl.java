@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import veterinaria.estoque.model.entidades.Perfil;
 import veterinaria.estoque.model.entidades.Usuario;
 import veterinaria.estoque.seguranca.UsuarioAutenticado;
 import veterinaria.estoque.service.ServiceAcessoSistema;
@@ -47,17 +48,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 	private Collection<? extends GrantedAuthority> getOperacoes(Usuario usuario) {
 		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-
-		/*for (UsuarioPerfil usuarioPerfil : usuario.getUsuarioPerfils()) {
-			for (PerfilOperacao perfilOperacao : usuarioPerfil.getPerfil().getPerfilOperacaos()) {
-				String codigoOperacao = perfilOperacao.getOperacao().getCodigo();
-				String role = String.format("%s%s", "ROLE_", codigoOperacao);
-				
-				SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(role);
-				
-				authorities.add(simpleGrantedAuthority);
-			}
-		}*/
+		
+		for (Perfil perfil : usuario.getListaPerfil()) {
+			String role = String.format("ROLE_%s", perfil.getCodigo());
+			
+			SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(role);
+			
+			authorities.add(simpleGrantedAuthority);
+		}
 
 		return authorities;
 	}

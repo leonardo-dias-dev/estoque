@@ -16,12 +16,9 @@
 		</div>
 
 		<h:form id="menuform">
-			<ps:menu id="sm_candidato" rendered="#{request.isUserInRole('CANDIDATO')}" >
-				<ui:include src="/WEB-INF/includes/candidato/menus-candidato.xhtml" />
-			</ps:menu>
-		
-			<ps:menu id="sm_admin" rendered="#{request.isUserInRole('ADMINISTRADOR') or request.isUserInRole('OPERADOR')}" >
-				<ui:include src="/WEB-INF/includes/admin/menus-admin.xhtml" />
+			<ps:menu id="sm_menu" >
+				<p:menuitem id="home" value="Home" icon="icon-home-outline"
+					outcome="/home" containerStyleClass="layout-menubar-active" />
 			</ps:menu>
 		</h:form>
 	</div>

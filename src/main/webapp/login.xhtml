@@ -21,6 +21,10 @@
 		
 	<h:body class="fontRegular white-back" >
 		
+		<f:metadata>
+			<f:viewAction action="#{controllerLogin.viewAction()}" />
+		</f:metadata>
+		
 		<div class="Container" >
 			<div class="Container80 MaxWid500 Fnone MarAuto TexAlCenter PaddingTopPercent10">
 	            <a href="http://www.unic.br/" id="login-logo" target="_blank" >
@@ -47,14 +51,12 @@
 		                    
 		                    <p:focus for="username" />
 		                 	<p:inputText id="username" label="Usuário" styleClass="Container80 Fnone MarAuto Fs18"
-		                 		maxlength="120" placeholder="Usuário" pt:required="required" >
-		                 		<f:validateBean disabled="true"/>
-		                 	</p:inputText>
+		                 		maxlength="120" placeholder="Usuário" pt:required="required" />
 		                    
 		                    <div class="EmptyBox10" />
 		                    
-		                    <p:password id="password" maxlength="100"
-		                    	styleClass="Container80 Fnone MarAuto Fs18" placeholder="Senha" pt:required="required" />
+		                    <p:password id="password" maxlength="100" pt:required="required"
+		                    	styleClass="Container80 Fnone MarAuto Fs18" placeholder="Senha" />
 		                    
 		                    <div class="EmptyBox20" />
 		                    

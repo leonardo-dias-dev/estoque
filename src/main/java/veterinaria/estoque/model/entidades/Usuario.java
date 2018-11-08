@@ -1,12 +1,16 @@
 package veterinaria.estoque.model.entidades;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -27,6 +31,11 @@ public class Usuario implements Serializable {
 	@NotNull
 	@Column(nullable=false, length=255)
 	private String senha;
+	
+	@JoinTable(name="usuario_perfil", schema="estoque",
+			joinColumns=@JoinColumn(name="usuario_id", foreignKey=@ForeignKey(foreignKeyDefinition="fk_usuario")),
+			inverseJoinColumns=@JoinColumn(name="perfil_id", foreignKey=@ForeignKey(foreignKeyDefinition="fk_perfil")))
+	private List<Perfil> listaPerfil;
 	
 	public Usuario() {
 		// TODO Auto-generated constructor stub
@@ -54,6 +63,14 @@ public class Usuario implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public List<Perfil> getListaPerfil() {
+		return listaPerfil;
+	}
+
+	public void setListaPerfil(List<Perfil> listaPerfil) {
+		this.listaPerfil = listaPerfil;
 	}
 
 	@Override

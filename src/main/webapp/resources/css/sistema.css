@@ -1,1 +1,9 @@
 @CHARSET "UTF-8";
+
+.ajax-status {
+	width: 32px;
+	height: 32px;
+	position: fixed;
+	right: 12px;
+	bottom: 10px
+}

@@ -6,33 +6,33 @@
 	xmlns:p="http://primefaces.org/ui" lang="pt-br"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
-<h:head>
-	<title>Acesso Negado | Secitec</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-        
-    <h:outputStylesheet name="css/font-icon-layout.css" library="sentinel-layout" />
-    <h:outputStylesheet name="css/sentinel-layout.css" library="sentinel-layout" />
-    <h:outputStylesheet name="css/core-layout.css" library="sentinel-layout" />
-</h:head>
+	<h:head>
+		<title>Acesso Negado</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	        
+	    <h:outputStylesheet name="css/font-icon-layout.css" library="sentinel-layout" />
+	    <h:outputStylesheet name="css/sentinel-layout.css" library="sentinel-layout" />
+	    <h:outputStylesheet name="css/core-layout.css" library="sentinel-layout" />
+	</h:head>
 
-<h:body class="fontRegular red-back">
-    <div class="Container100 Top20Percent PosAbsolute MarAuto OvHidden">
-        <div class="Wid50 MarAuto OvHidden TexAlCenter">
-            <h:graphicImage name="images/access-denied.svg" library="sentinel-layout" style="width: 140px;"/>
-            
-            <div class="EmptyBox20" />
-            
-            <span class="white Fs60 Wid100 DispBlock">Acesso Negado</span>
-            <span class="white Wid100 DispBlock Fs24">Por favor, verifique suas permissões !</span>
-            <br/>
-            <span class="white Wid100 DispBlock Fs12">Desculpe, mas você não tem acesso ao conteúdo.</span>
-            
-            <div class="EmptyBox20" />
-            
-            <p:button value="Voltar" styleClass="Fs24" onclick="history.go(-1); return false;" ></p:button>
-            
-            <div class="EmptyBox50" />
-        </div>
-    </div>
-</h:body>
+	<h:body class="fontRegular red-back">
+	    <div class="Container100 Top20Percent PosAbsolute MarAuto OvHidden">
+	        <div class="Wid50 MarAuto OvHidden TexAlCenter">
+	            <h:graphicImage library="sentinel-layout" name="images/access-denied.svg" style="width: 140px;"/>
+	            
+	            <div class="EmptyBox20" />
+	            
+	            <span class="white Fs60 Wid100 DispBlock">Acesso Negado</span>
+	            <span class="white Wid100 DispBlock Fs24">Por favor, verifique suas permissões !</span>
+	            <br/>
+	            <span class="white Wid100 DispBlock Fs12">Desculpe, mas você não tem acesso ao conteúdo.</span>
+	            
+	            <div class="EmptyBox20" />
+	            
+	            <p:button value="Voltar" styleClass="Fs24" onclick="history.go(-1); return false;" ></p:button>
+	            
+	            <div class="EmptyBox50" />
+	        </div>
+	    </div>
+	</h:body>
 </html>

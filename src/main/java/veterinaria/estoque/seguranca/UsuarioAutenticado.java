@@ -32,7 +32,7 @@ public class UsuarioAutenticado implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		return null;
+		return usuario.getSenha();
 	}
 
 	@Override

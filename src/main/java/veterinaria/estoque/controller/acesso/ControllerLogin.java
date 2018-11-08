@@ -27,6 +27,10 @@ public class ControllerLogin implements Serializable {
 		
 	}
 	
+	public void viewAction() {
+		
+	}
+	
 	public void entrar() throws ServletException, IOException {
 		ServletRequest servletRequest = (ServletRequest) facesContext.getExternalContext().getRequest();
 		ServletResponse servletResponse = (ServletResponse) facesContext.getExternalContext().getResponse();

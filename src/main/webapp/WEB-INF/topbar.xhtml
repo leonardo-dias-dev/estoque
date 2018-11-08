@@ -7,30 +7,19 @@
 
     <div id="layout-header" class="Unselectable fontRegular">
 
-        <p:link outcome="#{request.isUserInRole('ADMINISTRADOR') ? '/admin/pagina-inicial.xhtml' : '/candidato/pagina-inicial.xhtml'}">
-            <h:graphicImage style="padding:7px 5px;" library="images" styleClass="Fleft" name="logoMT.gif"
-                            width="40px"/>
-
+        <p:link outcome="/home.xhtml">
             <div id="layout-logo">
-            <span class="Fs19 FontTitilliumSemiBoldItalic Fleft" style="margin: 0 5px;">
-            	<span class="softblue">SECITEC</span>
-            </span>
+	            <span class="Fs19 FontTitilliumSemiBoldItalic Fleft" style="margin: 0 5px;">
+	            	<span class="softblue">Estoque</span>
+	            </span>
             </div>
         </p:link>
 
         <ul id="sm-topmenu" class="layout-header-widgets white Fs14">
             <li class="Fleft BordRadHalf TexAlCenter Animated05">
-                <ui:fragment rendered="#{request.isUserInRole('CANDIDATO')}">
-                    <a href="${request.contextPath}/candidato/appLogout" class="white Unselectable" title="Sair">
-                        <i class="icon-logout"/>
-                    </a>
-                </ui:fragment>
-
-                <ui:fragment rendered="#{request.isUserInRole('ADMINISTRADOR') or request.isUserInRole('OPERADOR')}">
-                    <a href="${request.contextPath}/admin/appLogout" class="white Unselectable" title="Sair">
-                        <i class="icon-logout"/>
-                    </a>
-                </ui:fragment>
+				<a href="${request.contextPath}/appLogout" class="white Unselectable" title="Sair">
+				    <i class="icon-logout"/>
+				</a>
             </li>
         </ul>
         <!-- NEVER REMOVE FOLLOWING 'UL' TAG ! BECAUSE THIS CONTAINS RESPONSIVE MODE HEADER MENU OPEN-CLOSE BUTTON -->

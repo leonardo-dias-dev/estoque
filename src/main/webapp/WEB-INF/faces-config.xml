@@ -20,12 +20,10 @@
 		
 		<view-handler>org.primefaces.application.DialogViewHandler</view-handler>
 
-		<!-- Resource Bundle -->
-		<!-- <resource-bundle>
-			<base-name>mensagens.mensagens-inscricao</base-name>
-			<var>mensagens-inscricao</var>
-		</resource-bundle> -->
-		
+		<resource-bundle>
+			<base-name>messages.messages-acesso-sistema</base-name>
+			<var>messages-acesso-sistema</var>
+		</resource-bundle>
 	</application>
 	
 	<factory>
