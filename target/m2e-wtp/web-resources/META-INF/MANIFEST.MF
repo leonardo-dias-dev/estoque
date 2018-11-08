@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Implementation-Title: estoque
 Build-Branch: 
 Implementation-Version: 1.8.0
-Build-Timestamp: 07/11/2018 11:30:58 UTC
+Build-Timestamp: 08/11/2018 16:02:55 UTC
 Built-By: leonardo.dias
 Build-Revision: 
 Implementation-Vendor-Id: br.com.simetrya
