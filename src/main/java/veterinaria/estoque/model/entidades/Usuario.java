@@ -1,6 +1,7 @@
 package veterinaria.estoque.model.entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,6 +29,31 @@ public class Usuario implements Serializable {
 	@Column(nullable=false, length=255)
 	private String senha;
 	
+	@NotNull
+	@Column(nullable=false, length=255)
+	private String nome;
+	
+	@NotNull
+	@Column(nullable=false, length=45)
+	private	String cpf;
+	
+	@Column(length=255)
+	private String email;
+	
+	@NotNull
+	@Column(nullable=false, length=255)
+	private Date dataNascimento;
+	
+	@Column(length=45)
+	private String telefoneFixo;
+	
+	@Column(length=45)
+	private String telefoneCelular;
+	
+	@NotNull
+	@Column(nullable=false, length=255)
+	private String cargo;
+	
 	public Usuario() {
 		// TODO Auto-generated constructor stub
 	}
@@ -54,6 +80,62 @@ public class Usuario implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+	public String getTelefoneFixo() {
+		return telefoneFixo;
+	}
+
+	public void setTelefoneFixo(String telefoneFixo) {
+		this.telefoneFixo = telefoneFixo;
+	}
+
+	public String getTelefoneCelular() {
+		return telefoneCelular;
+	}
+
+	public void setTelefoneCelular(String telefoneCelular) {
+		this.telefoneCelular = telefoneCelular;
+	}
+
+	public String getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
 	}
 
 	@Override
