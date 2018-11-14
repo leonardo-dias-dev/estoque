@@ -1,0 +1,188 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui">
+	
+	<ui:define name="titulo">Cadastro Usuário</ui:define>
+	
+	<ui:define name="breadcrumb">
+		<p:menuitem value="Cadastro" url="/cadastro/cadastro.xhtml" />
+		<p:menuitem value="Consultar Usuários" url="/cadastro/usuario/consulta-usuario.xhtml" />
+		<p:menuitem value="#{controllerCadastraUsuario.alteracao() ? 'Alterar' : 'Incluir'} Usuário" url="/cadastro/usuario/cadastra-usuario.xhtml" />
+	</ui:define>
+	
+	<f:metadata>
+		<f:viewParam name="sid" value="#{controllerCadastraUsuario.usuarioAlterar}" />
+		
+		<f:viewAction action="#{controllerCadastraUsuario.prepararAlteracao()}" />
+	</f:metadata>
+	
+	<ui:define name="acoesDocumento">
+		<h:form prependId="false">
+			<div class="ui-g ui-fluid" >
+				<div class="ui-g-12 ui-md-4 ui-lg-8" >
+					<h:outputLink onclick="history.go(-1); return false;" title="Voltar" >
+						<i class="icon-left-big Fs25 BotaoVoltar" />
+					</h:outputLink>
+				</div>
+				<div class="ui-g-12 ui-md-4 ui-lg-2" >
+					<p:commandButton value="Incluir" styleClass="GreenButton"
+						process="@this, formCadastraUsuario" update="formCadastraUsuario"
+						rendered="#{!controllerCadastraUsuario.alteracao()}"
+						actionListener="#{controllerCadastraUsuario.incluir()}" />
+					
+					<p:commandButton value="Alterar" styleClass="GreenButton"
+						process="@this, formCadastraUsuario" update="formCadastraUsuario"
+						rendered="#{controllerCadastraUsuario.alteracao()}"
+						actionListener="#{controllerCadastraUsuario.alteracao()}" />
+				</div>
+				<div class="ui-g-12 ui-md-4 ui-lg-2" >
+					<p:commandButton value="Fechar" styleClass="RedButton"
+						oncomplete="PF('dialogFechar').show()" process="@this" />
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+	
+	<ui:define name="content">
+		<div class="ContainerIndent ui-fluid">
+			<div class="Container">
+				<div class="Responsive100">
+					<div class="Container100">
+						<h:form id="formCadastraUsuario">
+							<h:outputText value="#{controllerCadastraUsuario.alteracao() ? 'Alterar' : 'Incluir'} Usuário" styleClass="Container100 Fs18 Fw900 MarBot1 Fleft" />
+							<p:separator styleClass="Wid100" />
+							<p:messages autoUpdate="true" closable="true" />
+							
+							<!-- Panel Detalhes Usuário -->
+							<div class="ui-g" >
+								<div class="ui-g-12 ui-md-6 ui-lg-8" >
+									<p:panel header="Detalhes do Usuário">
+										<div class="ui-g" >
+											<div class="ui-g-12 ui-md-6 ui-lg-4" >
+												<p:outputLabel value="CPF" styleClass="FsLabel" for="campoCpf" />
+												<p:inputMask id="campoCpf" styleClass="MarTopLabel" mask="999.999.999-99"
+													disabled="#{controllerCadastraUsuario.alteracao()}"
+													value="#{controllerCadastraUsuario.usuario.cpf}" >
+													
+													<f:converter converterId="converterCpf" />
+													
+													<p:ajax event="blur" process="formCadastraUsuario:campoCpf"
+														update="formCadastraUsuario:campoLogin"
+														listener="#{controllerCadastraUsuario.configurarLogin()}" />
+												</p:inputMask>
+											</div>
+											<div class="ui-g-12 ui-md-6 ui-lg-4" >
+												<p:outputLabel value="Nome" styleClass="FsLabel" for="campoNome" />
+												<p:inputText id="campoNome" styleClass="MarTopLabel" maxlength="255"
+													value="#{controllerCadastraUsuario.usuario.nome}" />
+											</div>
+											<div class="ui-g-12 ui-md-6 ui-lg-4" >
+												<p:outputLabel value="Data de Nascimento" styleClass="FsLabel" for="campoDataNascimento" />
+												<p:calendar id="campoDataNascimento" styleClass="MarTopLabel" mask="true" showOn="false"
+													pattern="dd/MM/yyyy" value="#{controllerCadastraUsuario.usuario.dataNascimento}"/>
+											</div>
+										</div>
+										
+										<div class="ui-g" >
+											<div class="ui-g-12 ui-md-6 ui-lg-4" >
+												<p:outputLabel value="Telefone Fixo" styleClass="FsLabel" for="campoTelefoneFixo" />
+												<p:inputText id="campoTelefoneFixo" styleClass="MarTopLabel telefone"
+													value="#{controllerCadastraUsuario.usuario.telefoneFixo}" />
+											</div>
+											<div class="ui-g-12 ui-md-4 ui-lg-4" >
+												<p:outputLabel value="Telefone Celular" styleClass="FsLabel" for="campoTelefoneCelular" />
+												<p:inputText id="campoTelefoneCelular" styleClass="MarTopLabel telefone"
+													value="#{controllerCadastraUsuario.usuario.telefoneCelular}" />
+											</div>
+											<div class="ui-g-12 ui-md-4 ui-lg-4" >
+												<p:outputLabel value="E-mail" styleClass="FsLabel" for="campoEmail" />
+												<p:inputText id="campoEmail" styleClass="MarTopLabel" maxlength="255"
+													value="#{controllerCadastraUsuario.usuario.email}" />
+											</div>
+										</div>
+										
+										<div class="ui-g" >
+											<div class="ui-g-12" >
+												<p:outputLabel value="Cargo" styleClass="FsLabel" for="campoCargo" />
+												<p:inputText id="campoCargo" styleClass="MarTopLabel" maxlength="255"
+													value="#{controllerCadastraUsuario.usuario.cargo}" />
+											</div>
+										</div>
+									</p:panel>
+								</div>
+								
+								<!-- Panel Credenciais de Acesso -->
+								<div class="ui-g-12 ui-md-6 ui-lg-4" >
+									<p:panel header="Credenciais de Acesso">
+										<div class="ui-g" >
+											<div class="ui-g-12" >
+												<p:outputLabel value="Login" styleClass="FsLabel" />
+												<p:inputText id="campoLogin" styleClass="MarTopLabel" maxlength="255"
+													disabled="true" value="#{controllerCadastraUsuario.usuario.login}" />
+											</div>
+										</div>
+										<div class="ui-g" >
+											<div class="ui-g-12" >
+												<p:outputLabel value="Senha" styleClass="FsLabel" />
+												<p:password id="campoSenha" value="#{controllerCadastraUsuario.usuario.senha}"
+													label="Senha" styleClass="MarTopLabel" maxlength="255"
+													match="campoConfirmarSenha" promptLabel="No mínimo 8 caracteres"
+													feedback="true" weakLabel="Fraca" goodLabel="Boa" strongLabel="Forte"
+													validatorMessage="A primeira senha deve corresponder à segunda" />
+											</div>
+										</div>
+										<div class="ui-g" >
+											<div class="ui-g-12" >
+												<p:outputLabel value="Confirmar Senha" styleClass="FsLabel" />
+												<p:password id="campoConfirmarSenha" styleClass="MarTopLabel" maxlength="255" />
+											</div>
+										</div>
+									</p:panel>
+								</div>
+							</div>
+							
+							<p:dialog id="dlSucessoSalvar" widgetVar="dialogSucessoSalvar" modal="true"
+								responsive="true" closable="true" resizable="false" showHeader="false">
+								<div class="ui-g" >
+									<div class="ui-g-12 ui-md-12 ui-lg-12" >
+										<span class="sim-text-color-blue FontBold">
+											<i class="icon-info-circled sim-text-color-blue" />
+											Registor salvo com sucesso!
+										</span>
+									</div>
+								</div>
+								
+								<div class="ui-g" >
+									<div class="ui-g-12 ui-md-3 ui-lg-3" />
+									<div class="ui-g-12 ui-md-6 ui-lg-6" >
+										<p:button value="Fechar" outcome="/cadastro/usuario/consulta-usuario" />
+									</div>
+									<div class="ui-g-12 ui-md-3 ui-lg-3" />
+								</div>
+							</p:dialog>
+							
+							<p:confirmDialog id="dlgFechar" widgetVar="dialogFechar" responsive="true"
+								header="Cancelar a #{controllerCadastraUsuario.alteracao() ? 'Alteração' : 'Inclusão'} de Usuário"
+								message="Os dados inseridos nesta tela serão perdidos. Deseja realmente continuar?">
+								<div class="ui-g" >
+									<div class="ui-g-12 ui-md-6 ui-lg-6" />
+									<div class="ui-g-12 ui-md-3 ui-lg-3" >
+										<p:button value="Sim" outcome="/cadastro/usuario/consulta-usuario" />
+									</div>
+									<div class="ui-g-12 ui-md-3 ui-lg-3" >
+										<p:button value="Não" onclick="PF('dialogFechar').hide(); return false;" />
+									</div>
+								</div>
+							</p:confirmDialog>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+	
+</ui:composition>

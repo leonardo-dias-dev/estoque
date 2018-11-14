@@ -7,18 +7,35 @@
 
 	<div id="layout-menubar" class="Unselectable fontRegular">
 		<div class="layout-menubarinner-box" id="buttonArea" >
-			<a href="#" id="layout-menubar-resize" class="BordRad3" title="Menu Resize" >
+			<a href="#" id="layout-menubar-resize" class="BordRad3" title="Fechar" >
 				<i class="icon-th-list-2" />
 			</a>
-			<a href="#" id="layout-menubar-resize2" class="BordRad3" title="Open Menu" >
+			<a href="#" id="layout-menubar-resize2" class="BordRad3" title="Abrir" >
 				<i class="icon-menu" />
 			</a>
 		</div>
 
 		<h:form id="menuform">
 			<ps:menu id="sm_menu" >
-				<p:menuitem id="home" value="Home" icon="icon-home-outline"
-					outcome="/home" containerStyleClass="layout-menubar-active" />
+				<p:menuitem id="sm_home" value="Home" icon="icon-home-outline" containerStyleClass="layout-menubar-active" outcome="/home" />
+				
+				<p:menuitem id="sm_entrada" value="Entrada" icon="icon-login" />
+				
+				<p:menuitem id="sm_saida" value="Saída" icon="icon-logout" />
+				
+				<p:menuitem id="sm_devolucao" value="Devolução" icon="icon-reply" />
+				
+				<p:submenu id="sm_cadastro" label="Cadastro" icon="icon-list-alt" >
+					<p:menuitem id="sm_produto" value="Produto" icon="icon-cubes" />
+					
+					<p:menuitem id="sm_usuario" value="Usuário" icon="icon-user-2" outcome="/cadastro/usuario/consulta-usuario" />
+				</p:submenu>
+				
+				<p:submenu id="sm_perfil" label="Perfil" icon="icon-sliders">
+					<p:menuitem id="sm_meus_dados" value="Meus Dados" icon="icon-clipboard" />
+				
+					<p:menuitem id="sm_senha_acesso" value="Senha de Acesso" icon="icon-lock-filled" />
+				</p:submenu>
 			</ps:menu>
 		</h:form>
 	</div>

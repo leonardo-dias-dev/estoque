@@ -1,0 +1,45 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<ui:define name="titulo">Cadastro</ui:define>
+	
+	<ui:define name="breadcrumb">
+		<p:menuitem value="Cadastro" url="/cadastro/cadastro.xhtml" />
+	</ui:define>
+	
+	<ui:define name="content">
+		<h:form>
+			<div class="ui-g ui-fluid" >
+				<div class="ui-g-12 ui-md-6 ui-lg-6" >
+					<p:panel>
+						<div class="Wid100 TexAlCenter">
+							<div class="MarAuto">
+								<h:outputLink value="#" title="Produto">
+									<i class="icon-cubes Fs100 hardblue" />
+								</h:outputLink>
+							</div>
+							<span class="FontBold Fs18 hardblue">Produto</span>
+						</div>
+					</p:panel>
+				</div>
+				<div class="ui-g-12 ui-md-6 ui-lg-6" >
+					<p:panel>
+						<div class="Wid100 TexAlCenter">
+							<div class="MarAuto">
+								<h:outputLink value="usuario/consulta-usuario.xhtml" title="Usuário">
+									<i class="icon-user-2 Fs100 hardblue" />
+								</h:outputLink>
+							</div>
+							<span class="FontBold Fs18 hardblue">Usuário</span>
+						</div>
+					</p:panel>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+	
+</ui:composition>

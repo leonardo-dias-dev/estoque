@@ -3,6 +3,7 @@ package veterinaria.estoque.model.entidades;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.enterprise.context.Dependent;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+@Dependent
 @Entity
 @Table(name="usuario", schema="estoque")
 public class Usuario implements Serializable {
@@ -25,7 +27,6 @@ public class Usuario implements Serializable {
 	@Column(nullable=false, length=50)
 	private String login;
 	
-	@NotNull
 	@Column(nullable=false, length=255)
 	private String senha;
 	
@@ -37,7 +38,8 @@ public class Usuario implements Serializable {
 	@Column(nullable=false, length=45)
 	private	String cpf;
 	
-	@Column(length=255)
+	@NotNull
+	@Column(nullable=false, length=255)
 	private String email;
 	
 	@NotNull

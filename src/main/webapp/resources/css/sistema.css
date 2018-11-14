@@ -12,3 +12,35 @@
 	padding-top: 0px !important;
 	padding-bottom: 0px !important;
 }
+
+.BotaoVoltar {
+	color: #72828B !important;
+}
+
+/* ---------- Font Weight ---------- */
+.FwInherit{ font-weight: inherit; }
+.Fw900{ font-weight: 900 !important; }
+.Fw800{ font-weight: 100 !important; }
+.Fw700{ font-weight: 700 !important; }
+.Fw600{ font-weight: 600 !important; }
+.Fw500{ font-weight: 500 !important; }
+.Fw400{ font-weight: 400 !important; }
+.Fw300{ font-weight: 300 !important; }
+.Fw200{ font-weight: 200 !important; }
+.Fw100{ font-weight: 100 !important; }
+
+.CommandLink {
+	text-decoration: none !important;
+}
+
+.FsLabel {
+	font-size: 0.9em !important;
+}
+
+.MarTopLabel{ margin-top: 3px !important; }
+.MarTopLabel input{ margin-top: 3px !important; } /* Usado para Calendário */
+.MarTopLabel button{ margin-top: 3px !important; } /* Usado para Calendário */
+
+.sim-text-color-blue {
+	color: #1072b9 !important;
+}

@@ -23,8 +23,8 @@ import org.springframework.web.filter.GenericFilterBean;
 @Component
 public class AuthenticationFilterImpl extends GenericFilterBean {
 
-	private static final String URL_LOGIN = "/candidato/login.xhtml";
-	private static final String URL_HOME = "/candidato/pagina-inicial.xhtml";
+	private static final String URL_LOGIN = "/login.xhtml";
+	private static final String URL_HOME = "/home.xhtml";
 	
 	@Override
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {

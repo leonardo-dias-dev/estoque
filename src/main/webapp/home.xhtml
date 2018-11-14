@@ -5,8 +5,61 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 	
+	<ui:define name="titulo">Home</ui:define>
+	
 	<ui:define name="content">
-		Home
+		<h:form>
+			<div class="ui-g ui-fluid" >
+				<div class="ui-g-12 ui-md-6 ui-lg-3" >
+					<p:panel>
+						<h:outputLink value="#" title="Entrada">
+							<div class="Wid100 TexAlCenter">
+								<div class="MarAuto">
+									<i class="icon-login Fs100 hardblue" />
+								</div>
+								<span class="FontBold Fs18 hardblue">Entrada</span>
+							</div>
+						</h:outputLink>
+					</p:panel>
+				</div>
+				<div class="ui-g-12 ui-md-6 ui-lg-3" >
+					<p:panel>
+						<div class="Wid100 TexAlCenter">
+							<div class="MarAuto">
+								<h:outputLink value="#" title="Saída">
+									<i class="icon-logout Fs100 hardblue" />
+								</h:outputLink>
+							</div>
+							<span class="FontBold Fs18 hardblue">Saída</span>
+						</div>
+					</p:panel>
+				</div>
+				<div class="ui-g-12 ui-md-6 ui-lg-3" >
+					<p:panel>
+						<div class="Wid100 TexAlCenter">
+							<div class="MarAuto">
+								<h:outputLink value="#" title="Devolução">
+									<i class="icon-reply Fs100 hardblue" />
+								</h:outputLink>
+							</div>
+							<span class="FontBold Fs18 hardblue">Devolução</span>
+						</div>
+					</p:panel>
+				</div>
+				<div class="ui-g-12 ui-md-6 ui-lg-3" >
+					<p:panel>
+						<div class="Wid100 TexAlCenter">
+							<div class="MarAuto">
+								<h:outputLink value="cadastro/cadastro.xhtml" title="Cadastro">
+									<i class="icon-list-alt Fs100 hardblue" />
+								</h:outputLink>
+							</div>
+							<span class="FontBold Fs18 hardblue">Cadastro</span>
+						</div>
+					</p:panel>
+				</div>
+			</div>
+		</h:form>
 	</ui:define>
 	
 </ui:composition>
