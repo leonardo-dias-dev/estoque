@@ -53,10 +53,10 @@
 								rows="10" rowKey="#{usuario.id}" rowsPerPageTemplate="10, 20, 50"
 								reflow="true" lazy="true" paginator="true" paginatorPosition="bottom" >
 								
-								<p:column selectionMode="single" width="4%" styleClass="TexAlCenter" />
-								
 								<p:column headerText="CPF" styleClass="TexAlCenter">
-									<h:outputText value="#{usuario.cpf}" />
+									<h:outputText value="#{usuario.cpf}" >
+										<f:converter converterId="converterCpf" />
+									</h:outputText>
 								</p:column>
 								
 								<p:column headerText="Nome" styleClass="TexAlCenter">
@@ -73,8 +73,11 @@
 								
 								<p:column styleClass="TexAlCenter">
 									<p:commandLink id="iconVisualizarUsuario" process="@this"
-										title="Visualizar" styleClass="CommandLink" >
+										title="Visualizar" styleClass="CommandLink"
+										update="formConsultarUsuario:dialogVisualizarUsuario"
+										oncomplete="PF('visualizarUsuario').show();" >
 										<i class="icon-search Fs18" style="color:#1372b9" />
+										<f:setPropertyActionListener value="#{usuario}" target="#{controllerConsultaUsuario.usuario}" />
 									</p:commandLink>
 									
 									<p:commandLink id="iconAlterar" process="@this"
@@ -83,13 +86,10 @@
 										<i class="icon-pencil Fs18" style="color:#1372b9" />
 										<f:setPropertyActionListener value="#{usuario}" target="#{controllerConsultaUsuario.usuario}" />
 									</p:commandLink>
-									
-									<p:commandLink id="iconAlterSenha" process="@this"
-										title="Alterar Senha" styleClass="CommandLink" >
-										<i class="icon-lock-filled Fs18" style="color:#1372b9" />
-									</p:commandLink>
 								</p:column>
 							</p:dataTable>
+							
+							<ui:include src="/WEB-INF/includes/cadastro/usuario/dialog-visualizar-usuario.xhtml" />
 						</h:form>
 					</div>
 				</div>

@@ -27,7 +27,7 @@ public class Usuario implements Serializable {
 	@Column(nullable=false, length=50)
 	private String login;
 	
-	@Column(nullable=false, length=255)
+	@Column(length=255)
 	private String senha;
 	
 	@NotNull
@@ -43,13 +43,13 @@ public class Usuario implements Serializable {
 	private String email;
 	
 	@NotNull
-	@Column(nullable=false, length=255)
+	@Column(name="data_nascimento", nullable=false, length=255)
 	private Date dataNascimento;
 	
-	@Column(length=45)
+	@Column(name="telefone_fixo", length=45)
 	private String telefoneFixo;
 	
-	@Column(length=45)
+	@Column(name="telefone_celular", length=45)
 	private String telefoneCelular;
 	
 	@NotNull

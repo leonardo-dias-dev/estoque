@@ -1,0 +1,79 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui">
+	
+	<p:dialog id="dialogVisualizarUsuario" widgetVar="visualizarUsuario" modal="true"
+		responsive="true" closable="true" resizable="false" showHeader="false" width="70%" >
+		<div class="ui-g ui-fluid" >
+			<div class="ui-g-12" >
+				<span class="sim-text-color-blue FontBold">
+					<i class="icon-info-circled sim-text-color-blue" />
+					Visualizar Usuário
+				</span>
+			</div>
+		</div>
+		
+		<div class="ui-g ui-fluid" >
+			<div class="ui-g-12 ui-md-4 ui-lg-4" >
+				<p:outputLabel value="Nome" styleClass="Fw900" />
+				<div class="EmptyBox5" />
+				<p:outputLabel value="#{controllerConsultaUsuario.usuario.nome}" />
+			</div>
+			<div class="ui-g-12 ui-md-4 ui-lg-4" >
+				<p:outputLabel value="CPF" styleClass="Fw900" />
+				<div class="EmptyBox5" />
+				<p:outputLabel value="#{controllerConsultaUsuario.usuario.cpf}" />
+			</div>
+			<div class="ui-g-12 ui-md-4 ui-lg-4" >
+				<h:outputLabel value="Data de Nascimento" styleClass="Fw900" />
+				<div class="EmptyBox5" />
+				<p:outputLabel value="#{controllerConsultaUsuario.usuario.dataNascimento}" />
+			</div>
+		</div>
+		
+		<div class="ui-g ui-fluid" >
+			<div class="ui-g-12 ui-md-4 ui-lg-4" >
+				<h:outputLabel value="Telefone fixo" styleClass="Fw900" />
+				<div class="EmptyBox5" />
+				<h:outputText value="#{controllerConsultaUsuario.usuario.telefoneFixo}" styleClass="telefone" />
+			</div>
+			<div class="ui-g-12 ui-md-4 ui-lg-4" >
+				<h:outputLabel value="Telefone Celular" styleClass="Fw900" />
+				<div class="EmptyBox5" />
+				<h:outputText value="#{controllerConsultaUsuario.usuario.telefoneCelular}" styleClass="telefone" />
+			</div>
+			<div class="ui-g-12 ui-md-4 ui-lg-4" >
+				<h:outputLabel value="E-mail" styleClass="Fw900" />
+				<div class="EmptyBox5" />
+				<h:outputText value="#{controllerConsultaUsuario.usuario.email}" />
+			</div>
+		</div>
+		
+		<div class="ui-g ui-fluid" >
+			<div class="ui-g-12 ui-md-8 ui-lg-8" >
+				<h:outputLabel value="Cargo" styleClass="Fw900" />
+				<div class="EmptyBox5" />
+				<h:outputText value="#{controllerConsultaUsuario.usuario.cargo}" />
+			</div>
+			<div class="ui-g-12 ui-md-4 ui-lg-4" >
+				<h:outputLabel value="Login" styleClass="Fw900" />
+				<div class="EmptyBox5" />
+				<h:outputText value="#{controllerConsultaUsuario.usuario.login}" />
+			</div>
+		</div>
+		
+		<div class="EmptyBox15" />
+		
+		<div class="ui-g" >
+			<div class="ui-g-12 ui-md-3 ui-lg-4" />
+			<div class="ui-g-12 ui-md-6 ui-lg-4" >
+				<p:button value="Fechar" onclick="PF('visualizarUsuario').hide(); return false;" />
+			</div>
+			<div class="ui-g-12 ui-md-3 ui-lg-4" />
+		</div>
+	</p:dialog>
+	
+</ui:composition>

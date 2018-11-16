@@ -12,13 +12,19 @@ import org.omnifaces.util.Faces;
 
 import veterinaria.estoque.model.entidades.Usuario;
 import veterinaria.estoque.repository.filter.FilterUsuario;
+import veterinaria.estoque.service.ServiceUsuario;
+import veterinaria.estoque.util.exceptions.ManipulationException;
 import veterinaria.estoque.util.jsf.UtilJSF;
+import veterinaria.estoque.util.jsf.UtilPrimeFaces;
 
 @Named
 @ViewScoped
 public class ControllerConsultaUsuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	@Inject
+	private ServiceUsuario serviceUsuario;
 	
 	@Inject
 	private FilterUsuario filterUsuario;

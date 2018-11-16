@@ -27,6 +27,7 @@ public class ServiceUsuario implements Serializable {
 		try {
 			return repositoryUsuario.salvar(usuario);
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new ManipulationException("Erro ao salvar usuário.");
 		}
 	}

@@ -24,6 +24,7 @@ public class Criptografia {
 			
 			return hexString.toString();
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new ManipulationException("Falha ao tentar criptograr a senha em SHA256", e);
 		}
 	}
@@ -47,6 +48,7 @@ public class Criptografia {
 
 			return hexString.toString();
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new ManipulationException("Falha ao tentar criptograr a senha em MD5", e);
 		}
 	}

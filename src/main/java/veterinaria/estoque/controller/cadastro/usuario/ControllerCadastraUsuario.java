@@ -41,7 +41,7 @@ public class ControllerCadastraUsuario implements Serializable {
 	
 	public void incluir() {
 		try {
-			serviceCadastraUsuario.validarUsuario(usuario);
+			serviceCadastraUsuario.validarInclusao(usuario);
 			
 			serviceCadastraUsuario.incluir(usuario);
 			
@@ -54,11 +54,17 @@ public class ControllerCadastraUsuario implements Serializable {
 	}
 	
 	public void alterar() {
-		
-	}
-	
-	public void limpar() {
-		
+		try {
+			serviceCadastraUsuario.validarAlteracao(usuario, usuarioAlterar);
+			
+			serviceCadastraUsuario.alterar(usuario, usuarioAlterar);
+			
+			UtilPrimeFaces.execute("PF('dialogSucessoSalvar').show();");
+		} catch (NegocioException e) {
+			UtilJSF.addWarnMessage(e.getMessage());
+		} catch (ManipulationException e) {
+			UtilJSF.addErrorMessage(e.getMessage());
+		}
 	}
 	
 	public void configurarLogin() {
