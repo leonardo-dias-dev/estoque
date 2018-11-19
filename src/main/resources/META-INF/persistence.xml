@@ -7,6 +7,7 @@
 		<jta-data-source>java:jboss/Estoque_MySQL_DS</jta-data-source>
 		
 		<class>veterinaria.estoque.model.entidades.Usuario</class>
+		<class>veterinaria.estoque.model.entidades.Produto</class>
 
 		<properties>
 			<property name="hibernate.enable_lazy_load_no_trans" value="true" />
