@@ -1,38 +1,50 @@
 package veterinaria.estoque.model.entidades;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.enterprise.context.Dependent;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import veterinaria.estoque.model.enums.UnidadeMedida;
 
+@Dependent
 @Entity
-@Table(name="produto", schema="estoque")
+@Table(name = "produto", schema = "estoque")
 public class Produto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(nullable=false, length=1000)
+
+	@NotNull
+	@Column(nullable = false, length = 1000)
 	private String nome;
-	
+
+	@NotNull
 	@Enumerated(EnumType.STRING)
-	@Column(name="unidade_medida", nullable=false, length=10)
+	@Column(name = "unidade_medida", nullable = false, length = 10)
 	private UnidadeMedida unidadeMedida;
-	
-	@Column(nullable=false, length=255)
+
+	@NotNull
+	@Column(nullable = false, length = 255)
 	private String medida;
-	
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "produto")
+	private List<Estoque> listaEstoque;
+
 	public Produto() {
 		// TODO Auto-generated constructor stub
 	}

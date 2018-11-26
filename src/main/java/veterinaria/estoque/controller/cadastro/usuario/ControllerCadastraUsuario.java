@@ -9,6 +9,7 @@ import javax.inject.Named;
 
 import veterinaria.estoque.model.entidades.Usuario;
 import veterinaria.estoque.service.ServiceCadastraUsuario;
+import veterinaria.estoque.util.cdi.qualifiers.QNovoUsuario;
 import veterinaria.estoque.util.exceptions.ManipulationException;
 import veterinaria.estoque.util.exceptions.NegocioException;
 import veterinaria.estoque.util.jsf.UtilJSF;
@@ -24,6 +25,7 @@ public class ControllerCadastraUsuario implements Serializable {
 	private ServiceCadastraUsuario serviceCadastraUsuario;
 	
 	@Inject
+	@QNovoUsuario
 	private Usuario usuario;
 	
 	private Usuario usuarioAlterar;

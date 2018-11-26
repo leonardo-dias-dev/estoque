@@ -106,6 +106,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.antMatchers("/cadastro/cadastro.xhtml").authenticated()
 					.antMatchers("/cadastro/usuario/consulta-usuario.xhtml").authenticated()
 					.antMatchers("/cadastro/usuario/cadastra-usuario.xhtml").authenticated()
+					
+					.antMatchers("/cadastro/produto/consulta-produto.xhtml").authenticated()
+					.antMatchers("/cadastro/produto/cadastra-produto.xhtml").authenticated()
+					
+					// Entrada
+					.antMatchers("/entrada/consulta-entrada.xhtml").authenticated()
+					.antMatchers("/entrada/cadastra-entrada.xhtml").authenticated()
 
 					// NEGADO OUTRAS URL's
 					.anyRequest().denyAll();

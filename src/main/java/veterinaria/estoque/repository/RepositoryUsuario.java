@@ -19,6 +19,14 @@ public class RepositoryUsuario extends AbstractRepository<Usuario, Long> impleme
 
 	private static final long serialVersionUID = 1L;
 	
+	public List<Usuario> buscarPorNome(String nome) {
+		TypedQuery<Usuario> typedQuery = getEntityManager().createQuery("FROM Usuario WHERE LOWER(nome) LIKE LOWER(:nome) ORDER BY nome", Usuario.class);
+		
+		typedQuery.setParameter("nome", "%" + nome + "%");
+		
+		return typedQuery.getResultList();
+	}
+	
 	public Usuario buscarPorLogin(String login) {
 		TypedQuery<Usuario> typedQuery = getEntityManager().createQuery("FROM Usuario WHERE login = :login", Usuario.class);
 		

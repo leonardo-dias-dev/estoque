@@ -1,10 +1,8 @@
 package veterinaria.estoque.model.entidades;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.enterprise.context.Dependent;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,41 +13,30 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 
 @Dependent
 @Entity
-@Table(name = "entrada", schema = "estoque")
-public class Entrada implements Serializable {
+@Table(name = "estoque", schema = "estoque")
+public class Estoque implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@Column(name = "data_entrada", nullable = false)
-	private Date dataEntrada;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "usuario_id", foreignKey = @ForeignKey(name = "usuario_fk"), nullable = false)
-	private Usuario usuario;
-
-	@NotNull
+	
+	@Column(nullable = false)
+	private int quantidade;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "produto_id", foreignKey = @ForeignKey(name = "produto_fk"), nullable = false)
 	private Produto produto;
-
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "lote_id", foreignKey = @ForeignKey(name = "lote_fk"), nullable = false)
 	private Lote lote;
-
-	@Min(value = 1)
-	@Column(nullable = false)
-	private int quantidade;
-
-	public Entrada() {
+	
+	public Estoque() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -61,20 +48,12 @@ public class Entrada implements Serializable {
 		this.id = id;
 	}
 
-	public Date getDataEntrada() {
-		return dataEntrada;
+	public int getQuantidade() {
+		return quantidade;
 	}
 
-	public void setDataEntrada(Date dataEntrada) {
-		this.dataEntrada = dataEntrada;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
 	}
 
 	public Produto getProduto() {
@@ -93,14 +72,6 @@ public class Entrada implements Serializable {
 		this.lote = lote;
 	}
 
-	public int getQuantidade() {
-		return quantidade;
-	}
-
-	public void setQuantidade(int quantidade) {
-		this.quantidade = quantidade;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -117,7 +88,7 @@ public class Entrada implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Entrada other = (Entrada) obj;
+		Estoque other = (Estoque) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

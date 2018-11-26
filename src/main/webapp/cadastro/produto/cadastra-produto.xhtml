@@ -1,0 +1,123 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui">
+	
+	<ui:define name="titulo">Cadastro Produto</ui:define>
+	
+	<ui:define name="breadcrumb">
+		<p:menuitem value="Cadastro" url="/cadastro/cadastro.xhtml" />
+		<p:menuitem value="Consultar Usuários" url="/cadastro/produto/consulta-produto.xhtml" />
+		<p:menuitem value="#{controllerCadastraProduto.alteracao() ? 'Alterar' : 'Incluir'} Produto" url="/cadastro/produto/cadastra-produto.xhtml" />
+	</ui:define>
+	
+	<f:metadata>
+		<f:viewParam name="sid" value="#{controllerCadastraProduto.produtoAlterar}" />
+		
+		<f:viewAction action="#{controllerCadastraProduto.prepararAlteracao()}" />
+	</f:metadata>
+	
+	<ui:define name="acoesDocumento">
+		<h:form prependId="false">
+			<div class="ui-g ui-fluid" >
+				<div class="ui-g-12 ui-md-4 ui-lg-8" >
+					<h:outputLink onclick="history.go(-1); return false;" title="Voltar" >
+						<i class="icon-left-big Fs25 BotaoVoltar" />
+					</h:outputLink>
+				</div>
+				<div class="ui-g-12 ui-md-4 ui-lg-2" >
+					<p:commandButton value="Incluir" styleClass="GreenButton"
+						process="@this, formCadastraProduto" update="formCadastraProduto"
+						rendered="#{!controllerCadastraProduto.alteracao()}"
+						actionListener="#{controllerCadastraProduto.incluir()}" />
+					
+					<p:commandButton value="Alterar" styleClass="GreenButton"
+						process="@this, formCadastraProduto" update="formCadastraProduto"
+						rendered="#{controllerCadastraProduto.alteracao()}"
+						actionListener="#{controllerCadastraProduto.alterar()}" />
+				</div>
+				<div class="ui-g-12 ui-md-4 ui-lg-2" >
+					<p:commandButton value="Fechar" styleClass="RedButton"
+						oncomplete="PF('dialogFechar').show()" process="@this" />
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+	
+	<ui:define name="content">
+		<div class="ContainerIndent ui-fluid">
+			<div class="Container">
+				<div class="Responsive100">
+					<div class="Container100">
+						<h:form id="formCadastraProduto">
+							<h:outputText value="#{controllerCadastraProduto.alteracao() ? 'Alterar' : 'Incluir'} Produto" styleClass="Container100 Fs18 Fw900 MarBot1 Fleft" />
+							<p:separator styleClass="Wid100" />
+							<p:messages autoUpdate="true" closable="true" />
+							
+							<!-- Panel Detalhes Usuário -->
+							<div class="ui-g" >
+								<div class="ui-g-12 ui-md-12 ui-lg-4" >
+									<p:outputLabel value="Nome" styleClass="FsLabel" for="campoNome" />
+									<p:inputText id="campoNome" styleClass="MarTopLabel" maxlength="1000"
+										value="#{controllerCadastraProduto.produto.nome}" />
+								</div>
+								<div class="ui-g-12 ui-md-6 ui-lg-4" >
+									<p:outputLabel value="Unidade de Medida" styleClass="FsLabel" for="campoUnidadeMedida" />
+									<p:selectOneMenu id="campoUnidadeMedida" styleClass="MarTopLabel"
+										value="#{controllerCadastraProduto.produto.unidadeMedida}" >
+										<f:selectItem noSelectionOption="true" />
+										<f:selectItems value="#{controllerCadastraProduto.listaUnidadeMedia}" var="unidadeMedia"
+											itemValue="#{unidadeMedia}" itemLabel="#{unidadeMedia.nome}" />
+									</p:selectOneMenu>
+								</div>
+								<div class="ui-g-12 ui-md-6 ui-lg-4" >
+									<p:outputLabel value="Medida" styleClass="FsLabel" for="campoMedida" />
+									<p:inputText id="campoMedida" styleClass="MarTopLabel" maxlength="255"
+										value="#{controllerCadastraProduto.produto.medida}" />
+								</div>
+							</div>
+							
+							<p:dialog id="dlSucessoSalvar" widgetVar="dialogSucessoSalvar" modal="true"
+								responsive="true" closable="true" resizable="false" showHeader="false">
+								<div class="ui-g" >
+									<div class="ui-g-12 ui-md-12 ui-lg-12" >
+										<span class="sim-text-color-blue FontBold">
+											<i class="icon-info-circled sim-text-color-blue" />
+											Registor salvo com sucesso!
+										</span>
+									</div>
+								</div>
+								
+								<div class="ui-g" >
+									<div class="ui-g-12 ui-md-3 ui-lg-3" />
+									<div class="ui-g-12 ui-md-6 ui-lg-6" >
+										<p:button value="Fechar" outcome="/cadastro/produto/consulta-produto" />
+									</div>
+									<div class="ui-g-12 ui-md-3 ui-lg-3" />
+								</div>
+							</p:dialog>
+							
+							<p:confirmDialog id="dlgFechar" widgetVar="dialogFechar" responsive="true"
+								header="Cancelar a #{controllerCadastraProduto.alteracao() ? 'Alteração' : 'Inclusão'} de Produto"
+								message="Os dados inseridos nesta tela serão perdidos. Deseja realmente continuar?">
+								<div class="ui-g" >
+									<div class="ui-g-12 ui-md-6 ui-lg-6" />
+									<div class="ui-g-12 ui-md-3 ui-lg-3" >
+										<p:button value="Sim" outcome="/cadastro/produto/consulta-produto" />
+									</div>
+									<div class="ui-g-12 ui-md-3 ui-lg-3" >
+										<p:button value="Não" onclick="PF('dialogFechar').hide(); return false;" />
+									</div>
+								</div>
+							</p:confirmDialog>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+	
+</ui:composition>

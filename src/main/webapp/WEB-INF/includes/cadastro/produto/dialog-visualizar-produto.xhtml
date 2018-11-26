@@ -1,0 +1,51 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui">
+	
+	<p:dialog id="dialogVisualizarProduto" widgetVar="visualizarProduto" modal="true"
+		responsive="true" closable="true" resizable="false" showHeader="false" width="70%" >
+		<div class="ui-g ui-fluid" >
+			<div class="ui-g-12" >
+				<span class="sim-text-color-blue FontBold">
+					<i class="icon-info-circled sim-text-color-blue" />
+					Visualizar Produto
+				</span>
+			</div>
+		</div>
+		
+		<div class="ui-g ui-fluid" >
+			<div class="ui-g-12" >
+				<p:outputLabel value="Nome" styleClass="Fw900" />
+				<div class="EmptyBox5" />
+				<h:outputText value="#{controllerConsultaProduto.produto.nome}" />
+			</div>
+		</div>
+		
+		<div class="ui-g ui-fluid" >
+			<div class="ui-g-12 ui-md-6 ui-lg-6" >
+				<h:outputLabel value="Unidade de Medida" styleClass="Fw900" />
+				<div class="EmptyBox5" />
+				<h:outputText value="#{controllerConsultaProduto.produto.unidadeMedida.nome}" />
+			</div>
+			<div class="ui-g-12 ui-md-6 ui-lg-6" >
+				<h:outputLabel value="Medida" styleClass="Fw900" />
+				<div class="EmptyBox5" />
+				<h:outputText value="#{controllerConsultaProduto.produto.medida}" />
+			</div>
+		</div>
+		
+		<div class="EmptyBox15" />
+		
+		<div class="ui-g" >
+			<div class="ui-g-12 ui-md-3 ui-lg-4" />
+			<div class="ui-g-12 ui-md-6 ui-lg-4" >
+				<p:button value="Fechar" onclick="PF('visualizarProduto').hide(); return false;" />
+			</div>
+			<div class="ui-g-12 ui-md-3 ui-lg-4" />
+		</div>
+	</p:dialog>
+	
+</ui:composition>

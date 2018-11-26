@@ -12,50 +12,53 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import veterinaria.estoque.util.cdi.qualifiers.QNovoUsuario;
+
 @Dependent
+@QNovoUsuario
 @Entity
-@Table(name="usuario", schema="estoque")
+@Table(name = "usuario", schema = "estoque")
 public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotNull
-	@Column(nullable=false, length=50)
+	@Column(nullable = false, length = 50)
 	private String login;
-	
-	@Column(length=255)
+
+	@Column(length = 255)
 	private String senha;
-	
+
 	@NotNull
-	@Column(nullable=false, length=255)
+	@Column(nullable = false, length = 255)
 	private String nome;
-	
+
 	@NotNull
-	@Column(nullable=false, length=45)
-	private	String cpf;
-	
+	@Column(nullable = false, length = 45)
+	private String cpf;
+
 	@NotNull
-	@Column(nullable=false, length=255)
+	@Column(nullable = false, length = 255)
 	private String email;
-	
+
 	@NotNull
-	@Column(name="data_nascimento", nullable=false, length=255)
+	@Column(name = "data_nascimento", nullable = false)
 	private Date dataNascimento;
-	
-	@Column(name="telefone_fixo", length=45)
+
+	@Column(name = "telefone_fixo", length = 45)
 	private String telefoneFixo;
-	
-	@Column(name="telefone_celular", length=45)
+
+	@Column(name = "telefone_celular", length = 45)
 	private String telefoneCelular;
-	
+
 	@NotNull
-	@Column(nullable=false, length=255)
+	@Column(nullable = false, length = 255)
 	private String cargo;
-	
+
 	public Usuario() {
 		// TODO Auto-generated constructor stub
 	}

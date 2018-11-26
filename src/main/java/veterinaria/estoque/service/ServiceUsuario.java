@@ -23,6 +23,10 @@ public class ServiceUsuario implements Serializable {
 		return repositoryUsuario.buscarPorId(id);
 	}
 	
+	public List<Usuario> buscarPorNome(String nome) {
+		return repositoryUsuario.buscarPorNome(nome);
+	}
+	
 	public Usuario salvar(Usuario usuario) throws ManipulationException {
 		try {
 			return repositoryUsuario.salvar(usuario);

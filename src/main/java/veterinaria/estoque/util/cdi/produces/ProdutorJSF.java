@@ -1,5 +1,7 @@
 package veterinaria.estoque.util.cdi.produces;
 
+import java.security.Principal;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
@@ -11,7 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.security.authentication.RememberMeAuthenticationToken;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
+import veterinaria.estoque.model.entidades.Usuario;
+import veterinaria.estoque.seguranca.QUsuarioAutenticado;
+import veterinaria.estoque.seguranca.UsuarioAutenticado;
 import veterinaria.estoque.util.cdi.qualifiers.QLogger;
 
 @ApplicationScoped
@@ -47,9 +54,9 @@ public class ProdutorJSF {
 		return LogFactory.getLog(ip.getMember().getDeclaringClass().getName());
 	}
 
-/*	@Produces
-	@QCandidatoAutenticado
-	private Candidato createUsuario() {
+	@Produces
+	@QUsuarioAutenticado
+	private Usuario createUsuario() {
 		Principal principal = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal();
 		UsuarioAutenticado usuarioSpring = null;
 
@@ -63,7 +70,7 @@ public class ProdutorJSF {
 			usuarioSpring = (UsuarioAutenticado) auth.getPrincipal();
 		}
 
-		return usuarioSpring.getCandidato();
-	}*/
+		return usuarioSpring.getUsuario();
+	}
 
 }

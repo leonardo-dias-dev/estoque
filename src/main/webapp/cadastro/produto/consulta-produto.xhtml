@@ -1,0 +1,85 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<ui:define name="titulo">Consultar Produto</ui:define>
+	
+	<ui:define name="breadcrumb">
+		<p:menuitem value="Cadastro" url="/cadastro/cadastro.xhtml" />
+		<p:menuitem value="Consultar Usuários" url="/cadastro/produto/consulta-produto.xhtml" />
+	</ui:define>
+	
+	<ui:define name="acoesDocumento">
+		<h:form prependIed="false">
+			<div class="ui-g ui-fluid" >
+				<div class="ui-g-12 ui-md-4 ui-lg-10" >
+					<h:outputLink onclick="history.go(-1); return false;" title="Voltar" >
+						<i class="icon-left-big Fs25 BotaoVoltar" />
+					</h:outputLink>
+				</div>
+				<div class="ui-g-12 ui-md-4 ui-lg-2" >
+					<p:button value="Novo" styleClass="GreenButton" outcome="/cadastro/produto/cadastra-produto" />
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+	
+	<ui:define name="content">
+		<div class="ContainerIndent ui-fluid">
+			<div class="Container">
+				<div class="Responsive100">
+					<div class="Container100">
+						<h:form id="formConsultarUsuario">
+							<h:outputText value="Consultar Produtos" styleClass="Container100 Fs18 Fw900 MarBot1 Fleft" />
+							<p:separator styleClass="Wid100" />
+							<p:messages autoUpdate="true" closable="true" />
+							
+							<div class="ui-g" >
+								<div class="ui-g-12 ui-md-6 ui-lg-6" >
+									<p:inputText placeholder="Digite o nome do produto" maxlength="1000"
+										value="#{controllerConsultaProduto.filterProduto.nome}" >
+										<p:ajax event="keyup" process="@this" update="formConsultarUsuario:tabelaProdutos" />
+									</p:inputText>
+								</div>
+							</div>
+							
+							<div class="EmptyBox5" />
+							
+							<p:dataTable id="tabelaProdutos" emptyMessage="Nenhum registro encontrado"
+								value="#{controllerConsultaProduto.filterProduto.lazyDataModel}" var="produto"
+								rowKey="#{produto.id}" rows="10" rowsPerPageTemplate="10, 20, 50"
+								reflow="true" lazy="true" paginator="true" paginatorPosition="bottom" >
+								
+								<p:column headerText="Nome" styleClass="TexAlCenter">
+									<h:outputText value="#{produto.nome}" />
+								</p:column>
+								
+								<p:column styleClass="TexAlCenter Wid10">
+									<p:commandLink id="iconVisualizar" process="@this"
+										title="Visualizar" styleClass="CommandLink"
+										update="formConsultarUsuario:dialogVisualizarProduto"
+										oncomplete="PF('visualizarProduto').show();" >
+										<i class="icon-search Fs18" style="color:#1372b9" />
+										<f:setPropertyActionListener value="#{produto}" target="#{controllerConsultaProduto.produto}" />
+									</p:commandLink>
+									
+									<p:commandLink id="iconAlterar" process="@this"
+										title="Alterar" styleClass="CommandLink"
+										action="#{controllerConsultaProduto.alterar()}" >
+										<i class="icon-pencil Fs18" style="color:#1372b9" />
+										<f:setPropertyActionListener value="#{produto}" target="#{controllerConsultaProduto.produto}" />
+									</p:commandLink>
+								</p:column>
+							</p:dataTable>
+							
+							<ui:include src="/WEB-INF/includes/cadastro/produto/dialog-visualizar-produto.xhtml" />
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
