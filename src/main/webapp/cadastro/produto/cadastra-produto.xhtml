@@ -31,12 +31,12 @@
 				</div>
 				<div class="ui-g-12 ui-md-4 ui-lg-2" >
 					<p:commandButton value="Incluir" styleClass="GreenButton"
-						process="@this, formCadastraProduto" update="formCadastraProduto"
+						process="@this, formCadastraProduto" update="formCadastraProduto, formBreadcrumb"
 						rendered="#{!controllerCadastraProduto.alteracao()}"
 						actionListener="#{controllerCadastraProduto.incluir()}" />
 					
 					<p:commandButton value="Alterar" styleClass="GreenButton"
-						process="@this, formCadastraProduto" update="formCadastraProduto"
+						process="@this, formCadastraProduto" update="formCadastraProduto, formBreadcrumb"
 						rendered="#{controllerCadastraProduto.alteracao()}"
 						actionListener="#{controllerCadastraProduto.alterar()}" />
 				</div>
@@ -80,26 +80,6 @@
 										value="#{controllerCadastraProduto.produto.medida}" />
 								</div>
 							</div>
-							
-							<p:dialog id="dlSucessoSalvar" widgetVar="dialogSucessoSalvar" modal="true"
-								responsive="true" closable="true" resizable="false" showHeader="false">
-								<div class="ui-g" >
-									<div class="ui-g-12 ui-md-12 ui-lg-12" >
-										<span class="sim-text-color-blue FontBold">
-											<i class="icon-info-circled sim-text-color-blue" />
-											Registor salvo com sucesso!
-										</span>
-									</div>
-								</div>
-								
-								<div class="ui-g" >
-									<div class="ui-g-12 ui-md-3 ui-lg-3" />
-									<div class="ui-g-12 ui-md-6 ui-lg-6" >
-										<p:button value="Fechar" outcome="/cadastro/produto/consulta-produto" />
-									</div>
-									<div class="ui-g-12 ui-md-3 ui-lg-3" />
-								</div>
-							</p:dialog>
 							
 							<p:confirmDialog id="dlgFechar" widgetVar="dialogFechar" responsive="true"
 								header="Cancelar a #{controllerCadastraProduto.alteracao() ? 'Alteração' : 'Inclusão'} de Produto"

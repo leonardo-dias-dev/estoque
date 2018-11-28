@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import veterinaria.estoque.util.cdi.qualifiers.QNovoUsuario;
@@ -46,6 +48,7 @@ public class Usuario implements Serializable {
 	private String email;
 
 	@NotNull
+	@Temporal(TemporalType.DATE)
 	@Column(name = "data_nascimento", nullable = false)
 	private Date dataNascimento;
 

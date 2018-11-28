@@ -33,7 +33,7 @@ public class ServiceConsultaEntrada implements Serializable {
 	}
 	
 	public List<Lote> completeLote(String query) {
-		return serviceLote.buscarPorNumero(new Long(query));
+		return serviceLote.buscarPorNumero(query);
 	}
 
 }

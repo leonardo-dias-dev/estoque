@@ -10,7 +10,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Dependent
 @Entity
@@ -23,11 +27,12 @@ public class Lote implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotNull
-	@Column(nullable = false)
-	private Long numero;
+	@NotBlank
+	@Column(nullable = false, length = 1000)
+	private String numero;
 
 	@NotNull
+	@Temporal(TemporalType.DATE)
 	@Column(name = "data_validade", nullable = false)
 	private Date dataValidade;
 
@@ -43,11 +48,11 @@ public class Lote implements Serializable {
 		this.id = id;
 	}
 
-	public Long getNumero() {
+	public String getNumero() {
 		return numero;
 	}
 
-	public void setNumero(Long numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 

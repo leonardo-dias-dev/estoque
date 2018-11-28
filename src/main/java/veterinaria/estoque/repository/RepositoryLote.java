@@ -13,10 +13,10 @@ public class RepositoryLote extends AbstractRepository<Lote, Long> implements Se
 
 	private static final long serialVersionUID = 1L;
 	
-	public List<Lote> buscarPorNumero(Long numero) {
-		TypedQuery<Lote> typedQuery = getEntityManager().createQuery("FROM Lote WHERE numero = :numero ORDER BY numero", Lote.class);
+	public List<Lote> buscarPorNumero(String numero) {
+		TypedQuery<Lote> typedQuery = getEntityManager().createQuery("FROM Lote WHERE numero LIKE :numero ORDER BY numero", Lote.class);
 		
-		typedQuery.setParameter("numero", numero);
+		typedQuery.setParameter("numero", "%" + numero + "%");
 		
 		return typedQuery.getResultList();
 	}

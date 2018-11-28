@@ -6,10 +6,12 @@
 
 		<jta-data-source>java:jboss/Estoque_MySQL_DS</jta-data-source>
 		
+		<class>veterinaria.estoque.model.entidades.Devolucao</class>
 		<class>veterinaria.estoque.model.entidades.Entrada</class>
 		<class>veterinaria.estoque.model.entidades.Estoque</class>
 		<class>veterinaria.estoque.model.entidades.Lote</class>
 		<class>veterinaria.estoque.model.entidades.Produto</class>
+		<class>veterinaria.estoque.model.entidades.Saida</class>
 		<class>veterinaria.estoque.model.entidades.Usuario</class>
 
 		<properties>
@@ -17,7 +19,7 @@
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
 			<!-- <property name="hibernate.hbm2ddl.auto" value="create" /> -->
-			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL57Dialect" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 		</properties>
 	</persistence-unit>
 </persistence>

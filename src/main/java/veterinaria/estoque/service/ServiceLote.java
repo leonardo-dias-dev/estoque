@@ -17,7 +17,7 @@ public class ServiceLote implements Serializable {
 	@Inject
 	private RepositoryLote repositoryLote;
 	
-	public List<Lote> buscarPorNumero(Long numero) {
+	public List<Lote> buscarPorNumero(String numero) {
 		return repositoryLote.buscarPorNumero(numero);
 	}
 	

@@ -30,7 +30,9 @@
 			<div class="ui-g-12 ui-md-4 ui-lg-4" >
 				<h:outputLabel value="Data de Nascimento" styleClass="Fw900" />
 				<div class="EmptyBox5" />
-				<p:outputLabel value="#{controllerConsultaUsuario.usuario.dataNascimento}" />
+				<p:outputLabel value="#{controllerConsultaUsuario.usuario.dataNascimento}" >
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</p:outputLabel>
 			</div>
 		</div>
 		

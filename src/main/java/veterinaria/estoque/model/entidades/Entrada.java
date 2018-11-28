@@ -15,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -29,6 +31,7 @@ public class Entrada implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "data_entrada", nullable = false)
 	private Date dataEntrada;
 

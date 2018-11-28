@@ -28,7 +28,7 @@ public class FilterEntrada implements Serializable {
 	
 	private Produto produto;
 	
-	private Long lote;
+	private String lote;
 	
 	private Date dataInicial;
 	
@@ -108,11 +108,11 @@ public class FilterEntrada implements Serializable {
 		this.dataFinal = dataFinal;
 	}
 
-	public Long getLote() {
+	public String getLote() {
 		return lote;
 	}
 
-	public void setLote(Long lote) {
+	public void setLote(String lote) {
 		this.lote = lote;
 	}
 

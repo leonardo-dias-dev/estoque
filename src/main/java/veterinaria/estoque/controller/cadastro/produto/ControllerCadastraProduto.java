@@ -13,7 +13,6 @@ import veterinaria.estoque.service.ServiceCadastraProduto;
 import veterinaria.estoque.util.exceptions.ManipulationException;
 import veterinaria.estoque.util.exceptions.NegocioException;
 import veterinaria.estoque.util.jsf.UtilJSF;
-import veterinaria.estoque.util.jsf.UtilPrimeFaces;
 
 @Named
 @ViewScoped
@@ -46,7 +45,9 @@ public class ControllerCadastraProduto implements Serializable {
 			
 			serviceCadastraProduto.incluir(produto);
 			
-			UtilPrimeFaces.execute("PF('dialogSucessoSalvar').show();");
+			mensagemProdutoSalvo();
+			
+			limpar();
 		} catch (NegocioException e) {
 			UtilJSF.addInfoMessage(e.getMessage());
 		} catch (ManipulationException e) {
@@ -61,13 +62,23 @@ public class ControllerCadastraProduto implements Serializable {
 			
 			serviceCadastraProduto.alterar(produto);
 			
-			UtilPrimeFaces.execute("PF('dialogSucessoSalvar').show();");
+			mensagemProdutoSalvo();
+			
+			limpar();
 		} catch (NegocioException e) {
 			UtilJSF.addInfoMessage(e.getMessage());
 		} catch (ManipulationException e) {
 			e.printStackTrace();
 			UtilJSF.addErrorMessage(e.getMessage());
 		}
+	}
+	
+	private void mensagemProdutoSalvo() {
+		UtilJSF.addInfoMessage("Produto salvo com sucesso!");
+	}
+	
+	private void limpar() {
+		produto = new Produto();
 	}
 	
 	public UnidadeMedida[] getListaUnidadeMedia() {

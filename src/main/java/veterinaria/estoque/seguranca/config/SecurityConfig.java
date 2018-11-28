@@ -120,6 +120,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					// Perfil
 					.antMatchers("/perfil/meus-dados.xhtml").authenticated()
 					.antMatchers("/perfil/senha-acesso.xhtml").authenticated()
+					
+					// Saida
+					.antMatchers("/saida/consulta-saida.xhtml").authenticated()
+					.antMatchers("/saida/cadastra-saida.xhtml").authenticated()
 
 					// NEGADO OUTRAS URL's
 					.anyRequest().denyAll();
