@@ -81,6 +81,14 @@ public class Produto implements Serializable {
 		this.medida = medida;
 	}
 
+	public List<Estoque> getListaEstoque() {
+		return listaEstoque;
+	}
+
+	public void setListaEstoque(List<Estoque> listaEstoque) {
+		this.listaEstoque = listaEstoque;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

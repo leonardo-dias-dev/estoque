@@ -1,0 +1,91 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui">
+	
+	<ui:define name="titulo">Meus Dados</ui:define>
+	
+	<ui:define name="breadcrumb">
+		<p:menuitem value="Meus Dados" url="/perfil/meus-dados.xhtml" />
+	</ui:define>
+	
+	<ui:define name="acoesDocumento">
+		<h:form prependId="false">
+			<div class="ui-g ui-fluid" >
+				<div class="ui-g-12 ui-md-8 ui-lg-10" >
+					<h:outputLink onclick="history.go(-1); return false;" title="Voltar" >
+						<i class="icon-left-big Fs25 BotaoVoltar" />
+					</h:outputLink>
+				</div>
+				<div class="ui-g-12 ui-md-4 ui-lg-2" >
+					<p:commandButton value="Alterar" styleClass="GreenButton"
+						process="@this, formMeusDados" update="formMeusDados"
+						actionListener="#{controllerMeusDados.alterar()}" />
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+	
+	<ui:define name="content">
+		<div class="ContainerIndent ui-fluid">
+			<div class="Container">
+				<div class="Responsive100">
+					<div class="Container100">
+						<h:form id="formMeusDados">
+							<h:outputText value="Meus Dados" styleClass="Container100 Fs18 Fw900 MarBot1 Fleft" />
+							<p:separator styleClass="Wid100" />
+							<p:messages autoUpdate="true" closable="true" />
+							
+							<div class="ui-g" >
+								<div class="ui-g-12 ui-md-6 ui-lg-4" >
+									<p:outputLabel value="CPF" styleClass="FsLabel" for="campoCpf" />
+									<p:inputMask id="campoCpf" styleClass="MarTopLabel" mask="999.999.999-99"
+										disabled="true" value="#{controllerMeusDados.usuario.cpf}" />
+								</div>
+								<div class="ui-g-12 ui-md-6 ui-lg-4" >
+									<p:outputLabel value="Nome" styleClass="FsLabel" for="campoNome" />
+									<p:inputText id="campoNome" styleClass="MarTopLabel" maxlength="255"
+										value="#{controllerMeusDados.usuario.nome}" />
+								</div>
+								<div class="ui-g-12 ui-md-6 ui-lg-4" >
+									<p:outputLabel value="Data de Nascimento" styleClass="FsLabel" for="campoDataNascimento" />
+									<p:calendar id="campoDataNascimento" styleClass="MarTopLabel" mask="true" showOn="false"
+										pattern="dd/MM/yyyy" value="#{controllerMeusDados.usuario.dataNascimento}"/>
+								</div>
+							</div>
+							
+							<div class="ui-g" >
+								<div class="ui-g-12 ui-md-6 ui-lg-4" >
+									<p:outputLabel value="Telefone Fixo" styleClass="FsLabel" for="campoTelefoneFixo" />
+									<p:inputText id="campoTelefoneFixo" styleClass="MarTopLabel telefone"
+										value="#{controllerMeusDados.usuario.telefoneFixo}" />
+								</div>
+								<div class="ui-g-12 ui-md-4 ui-lg-4" >
+									<p:outputLabel value="Telefone Celular" styleClass="FsLabel" for="campoTelefoneCelular" />
+									<p:inputText id="campoTelefoneCelular" styleClass="MarTopLabel telefone"
+										value="#{controllerMeusDados.usuario.telefoneCelular}" />
+								</div>
+								<div class="ui-g-12 ui-md-4 ui-lg-4" >
+									<p:outputLabel value="E-mail" styleClass="FsLabel" for="campoEmail" />
+									<p:inputText id="campoEmail" styleClass="MarTopLabel" maxlength="255"
+										value="#{controllerMeusDados.usuario.email}" />
+								</div>
+							</div>
+							
+							<div class="ui-g" >
+								<div class="ui-g-12" >
+									<p:outputLabel value="Cargo" styleClass="FsLabel" for="campoCargo" />
+									<p:inputText id="campoCargo" styleClass="MarTopLabel" maxlength="255"
+										value="#{controllerMeusDados.usuario.cargo}" />
+								</div>
+							</div>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

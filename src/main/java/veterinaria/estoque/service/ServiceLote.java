@@ -20,5 +20,9 @@ public class ServiceLote implements Serializable {
 	public List<Lote> buscarPorNumero(Long numero) {
 		return repositoryLote.buscarPorNumero(numero);
 	}
+	
+	public Lote buscarPorId(Long id) {
+		return repositoryLote.buscarPorId(id);
+	}
 
 }

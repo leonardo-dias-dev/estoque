@@ -1,0 +1,103 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui">
+	
+	<ui:define name="titulo">Senha de Acesso</ui:define>
+	
+	<ui:define name="breadcrumb">
+		<p:menuitem value="Senha de Acesso" url="/perfil/senha-acesso.xhtml" />
+	</ui:define>
+	
+	<ui:define name="acoesDocumento">
+		<h:form prependId="false">
+			<div class="ui-g ui-fluid" >
+				<div class="ui-g-12" >
+					<h:outputLink onclick="history.go(-1); return false;" title="Voltar" >
+						<i class="icon-left-big Fs25 BotaoVoltar" />
+					</h:outputLink>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+	
+	<ui:define name="content">
+		<div class="ContainerIndent ui-fluid">
+			<div class="Container">
+				<div class="Responsive100">
+					<div class="Container100">
+						<h:form id="formSenhaAcesso">
+							<h:outputText value="Meus Dados" styleClass="Container100 Fs18 Fw900 MarBot1 Fleft" />
+							<p:separator styleClass="Wid100" />
+							<p:messages autoUpdate="true" closable="true" />
+							
+							<div class="ui-g" >
+								<div class="ui-g-12 ui-md-3 ui-lg-4" />
+								<div class="ui-g-12 ui-md-6 ui-lg-4" >
+									<p:password id="campoSenhaAtual" styleClass="Fs18 TexAlCenter"
+										placeholder="Senha Atual" maxlength="60"
+										required="true" requiredMessage="Senha atual é obrigatório."
+										value="#{controllerSenhaAcesso.senhaAtual}" />
+										
+									<div class="EmptyBox10" />
+										
+									<p:password id="campoNovaSenha" placeholder="Nova Senha" styleClass="TexAlCenter Fs18"
+										feedback="true" weakLabel="Fraca" goodLabel="Boa" maxlength="60"
+										strongLabel="Forte" label="Nova Senha"
+										match="campoConfirmarSenha" required="true"
+										requiredMessage="Nova Senha é obrigatório."
+										validatorMessage="Primeira senha deve ser igual a segunda."
+										value="#{controllerSenhaAcesso.novaSenha}" />
+									
+									<div class="EmptyBox10" />
+									
+									<p:password id="campoConfirmarSenha"
+										placeholder="Confirmar Nova Senha"
+										styleClass="TexAlCenter Fs18" label="Confirmar Nova Senha"
+										maxlength="60" required="true"
+										requiredMessage="Confirmar Nova Senha é obrigatório." />
+								</div>
+								<div class="ui-g-12 ui-md-3 ui-lg-4" />
+							</div>
+							
+							<div class="EmptyBox10" />
+
+							<div class="ui-g">
+								<div class="ui-g-12 ui-md-3 ui-lg-4" />
+								<div class="ui-g-12 ui-md-6 ui-lg-4">
+									<p:commandButton value="Salvar" process="@form" update="@form"
+										actionListener="#{controllerSenhaAcesso.alterar()}" />
+								</div>
+								<div class="ui-g-12 ui-md-3 ui-lg-4" />
+							</div>
+							
+							<p:dialog id="dlSucessoSalvar" widgetVar="dialogSucessoSalvar"
+								modal="true" responsive="true" closable="true" resizable="false"
+								showHeader="false">
+								<div class="ui-g">
+									<div class="ui-g-12 ui-md-12 ui-lg-12">
+										<span class="sim-text-color-blue FontBold"> <i
+											class="icon-info-circled sim-text-color-blue" />
+											Informações salvas com sucesso!
+										</span>
+									</div>
+								</div>
+
+								<div class="ui-g">
+									<div class="ui-g-12 ui-md-3 ui-lg-3" />
+									<div class="ui-g-12 ui-md-6 ui-lg-6">
+										<p:button value="Ok" outcome="/home" />
+									</div>
+									<div class="ui-g-12 ui-md-3 ui-lg-3" />
+								</div>
+							</p:dialog>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

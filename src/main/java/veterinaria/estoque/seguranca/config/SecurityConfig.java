@@ -113,6 +113,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					// Entrada
 					.antMatchers("/entrada/consulta-entrada.xhtml").authenticated()
 					.antMatchers("/entrada/cadastra-entrada.xhtml").authenticated()
+					
+					// Estoque
+					.antMatchers("/estoque/consulta-estoque.xhtml").authenticated()
+					
+					// Perfil
+					.antMatchers("/perfil/meus-dados.xhtml").authenticated()
+					.antMatchers("/perfil/senha-acesso.xhtml").authenticated()
 
 					// NEGADO OUTRAS URL's
 					.anyRequest().denyAll();

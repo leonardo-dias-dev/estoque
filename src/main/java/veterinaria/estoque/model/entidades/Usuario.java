@@ -58,6 +58,8 @@ public class Usuario implements Serializable {
 	@NotNull
 	@Column(nullable = false, length = 255)
 	private String cargo;
+	
+	private boolean administrador;
 
 	public Usuario() {
 		// TODO Auto-generated constructor stub
@@ -141,6 +143,14 @@ public class Usuario implements Serializable {
 
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
+	}
+
+	public boolean isAdministrador() {
+		return administrador;
+	}
+
+	public void setAdministrador(boolean administrador) {
+		this.administrador = administrador;
 	}
 
 	@Override

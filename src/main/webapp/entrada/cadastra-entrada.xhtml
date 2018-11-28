@@ -13,11 +13,11 @@
 		<p:menuitem value="Incluir Entrada" url="/entrada/cadastra-entrada.xhtml" />
 	</ui:define>
 	
-	<!-- <f:metadata>
-		<f:viewParam name="sid" value="#{controllerCadastraProduto.produtoAlterar}" />
+	<f:metadata>
+		<f:viewParam name="sid" value="#{controllerCadastraEntrada.entradaAlterar}" />
 		
-		<f:viewAction action="#{controllerCadastraProduto.prepararAlteracao()}" />
-	</f:metadata> -->
+		<f:viewAction action="#{controllerCadastraEntrada.prepararAlteracao()}" />
+	</f:metadata>
 	
 	<ui:define name="acoesDocumento">
 		<h:form prependId="false">
@@ -30,7 +30,13 @@
 				<div class="ui-g-12 ui-md-4 ui-lg-2" >
 					<p:commandButton value="Incluir" styleClass="GreenButton"
 						process="@this, formCadastraEntrada" update="formCadastraEntrada"
+						rendered="#{!controllerCadastraEntrada.alteracao()}"
 						actionListener="#{controllerCadastraEntrada.incluir()}" />
+						
+					<p:commandButton value="Alterar" styleClass="GreenButton"
+						process="@this, formCadastraEntrada" update="formCadastraEntrada"
+						rendered="#{controllerCadastraEntrada.alteracao()}"
+						actionListener="#{controllerCadastraEntrada.alterar()}" />
 				</div>
 				<div class="ui-g-12 ui-md-4 ui-lg-2" >
 					<p:commandButton value="Fechar" styleClass="RedButton"

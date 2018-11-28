@@ -48,14 +48,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	private Collection<? extends GrantedAuthority> getOperacoes(Usuario usuario) {
 		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 		
-		/*for (Perfil perfil : usuario.getListaPerfil()) {
-			String role = String.format("ROLE_%s", perfil.getCodigo());
-			
-			SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(role);
+		if (usuario.isAdministrador()) {
+			SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("ROLE_ADMINISTRADOR");
 			
 			authorities.add(simpleGrantedAuthority);
-		}*/
-
+		}
+			
 		return authorities;
 	}
 

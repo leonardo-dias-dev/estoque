@@ -31,7 +31,7 @@
 			<div class="Container">
 				<div class="Responsive100">
 					<div class="Container100">
-						<h:form id="formConsultarUsuario">
+						<h:form id="formConsultarEntrada">
 							<h:outputText value="Consultar Produtos" styleClass="Container100 Fs18 Fw900 MarBot1 Fleft" />
 							<p:separator styleClass="Wid100" />
 							<p:messages autoUpdate="true" closable="true" />
@@ -58,11 +58,8 @@
 							<div class="ui-g" >
 								<div class="ui-g-12 ui-md-12 ui-lg-4" >
 									<p:outputLabel value="Lote" styleClass="FsLabel" />
-									<p:autoComplete id="campoLote" styleClass="MarTopLabel"
-										scrollHeight="200" maxlength="50" forceSelection="true"
-										completeMethod="#{controllerConsultaEntrada.completeLote}"
-										value="#{controllerConsultaEntrada.filterEntrada.lote}"
-										var="lote" itemValue="#{lote}" itemLabel="#{lote.numero}" />
+									<p:inputText id="campoLote" styleClass="MarTopLabel" maxlength="50"
+										value="#{controllerConsultaEntrada.filterEntrada.lote}" />
 								</div>
 								<div class="ui-g-12 ui-md-6 ui-lg-4" >
 									<p:outputLabel value="Data Inicial" styleClass="FsLabel" />
@@ -99,6 +96,12 @@
 									<h:outputText value="#{entrada.usuario.nome}" />
 								</p:column>
 								
+								<p:column headerText="Data Entrada" styleClass="TexAlCenter">
+									<h:outputText value="#{entrada.dataEntrada}" >
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:outputText>
+								</p:column>
+								
 								<p:column headerText="Produto" styleClass="TexAlCenter">
 									<h:outputText value="#{entrada.produto.nome}" />
 								</p:column>
@@ -109,6 +112,15 @@
 								
 								<p:column headerText="Quantidade" styleClass="TexAlCenter">
 									<h:outputText value="#{entrada.quantidade}" />
+								</p:column>
+								
+								<p:column styleClass="TexAlCenter Wid10">
+									<p:commandLink id="iconAlterar" process="@this"
+										title="Alterar" styleClass="CommandLink"
+										action="#{controllerConsultaEntrada.alterar()}" >
+										<i class="icon-pencil Fs18" style="color:#1372b9" />
+										<f:setPropertyActionListener value="#{entrada}" target="#{controllerConsultaEntrada.entrada}" />
+									</p:commandLink>
 								</p:column>
 							</p:dataTable>
 						</h:form>

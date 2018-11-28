@@ -19,22 +19,24 @@
 			<ps:menu id="sm_menu" >
 				<p:menuitem id="sm_home" value="Home" icon="icon-home-outline" containerStyleClass="layout-menubar-active" outcome="/home" />
 				
-				<p:menuitem id="sm_entrada" value="Entrada" icon="icon-login" />
+				<p:menuitem id="sm_estoque" value="Estoque" icon="icon-cubes" outcome="/estoque/consulta-estoque" />
+				
+				<p:menuitem id="sm_entrada" value="Entrada" icon="icon-login" outcome="/entrada/consulta-entrada" />
 				
 				<p:menuitem id="sm_saida" value="Saída" icon="icon-logout" />
 				
 				<p:menuitem id="sm_devolucao" value="Devolução" icon="icon-reply" />
 				
 				<p:submenu id="sm_cadastro" label="Cadastro" icon="icon-list-alt" >
-					<p:menuitem id="sm_produto" value="Produto" icon="icon-cubes" outcome="/cadastro/produto/consulta-produto" />
+					<p:menuitem id="sm_produto" value="Produto" icon="icon-cube" outcome="/cadastro/produto/consulta-produto" />
 					
 					<p:menuitem id="sm_usuario" value="Usuário" icon="icon-user-2" outcome="/cadastro/usuario/consulta-usuario" />
 				</p:submenu>
 				
 				<p:submenu id="sm_perfil" label="Perfil" icon="icon-sliders">
-					<p:menuitem id="sm_meus_dados" value="Meus Dados" icon="icon-clipboard" />
+					<p:menuitem id="sm_meus_dados" value="Meus Dados" icon="icon-clipboard" outcome="/perfil/meus-dados" />
 				
-					<p:menuitem id="sm_senha_acesso" value="Senha de Acesso" icon="icon-lock-filled" />
+					<p:menuitem id="sm_senha_acesso" value="Senha de Acesso" icon="icon-lock-filled" outcome="/perfil/senha-acesso" />
 				</p:submenu>
 			</ps:menu>
 		</h:form>

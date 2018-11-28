@@ -12,12 +12,21 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import veterinaria.estoque.model.entidades.Entrada;
+import veterinaria.estoque.model.entidades.Lote;
 import veterinaria.estoque.repository.filter.FilterEntrada;
 
 @Dependent
 public class RepositoryEntrada extends AbstractRepository<Entrada, Long> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	public List<Entrada> buscarPorLote(Lote lote) {
+		TypedQuery<Entrada> typedQuery = getEntityManager().createQuery("FROM Entrada WHERE lote.numero = :lote", Entrada.class);
+		
+		typedQuery.setParameter("lote", lote.getNumero());
+		
+		return typedQuery.getResultList();
+	}
 	
 	public int contarComFiltro(FilterEntrada filterEntrada) {
 		CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
@@ -72,7 +81,7 @@ public class RepositoryEntrada extends AbstractRepository<Entrada, Long> impleme
 		}
 		
 		if (filterEntrada.getLote() != null) {
-			Predicate predicate = criteriaBuilder.equal(root.get("lote"), filterEntrada.getLote());
+			Predicate predicate = criteriaBuilder.equal(root.get("lote").get("numero"), filterEntrada.getLote());
 			
 			listaPredicate.add(predicate);
 		}
