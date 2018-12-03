@@ -30,6 +30,8 @@ public class ControllerCadastraSaida implements Serializable {
 	@Inject
 	private Saida saida;
 	
+	private Saida saidaAlterar;
+	
 	@NotNull
 	private Produto produto;
 	
@@ -39,6 +41,15 @@ public class ControllerCadastraSaida implements Serializable {
 	@PostConstruct
 	public void init() {
 		
+	}
+	
+	public void prepararAlteracao() {
+		if (saidaAlterar != null) {
+			saida = saidaAlterar;
+			
+			setProduto(saidaAlterar.getEstoque().getProduto());
+			setLote(saidaAlterar.getEstoque().getLote());
+		}
 	}
 	
 	public void incluir() {
@@ -59,7 +70,20 @@ public class ControllerCadastraSaida implements Serializable {
 	}
 	
 	public void alterar() {
-		
+		try {
+			Estoque estoque = serviceCadastraSaida.validarAlteracao(saida, saidaAlterar, produto, lote);
+			
+			serviceCadastraSaida.alterar(saida, estoque);
+			
+			mensagemSaidaSalvo();
+			
+			limpar();
+		} catch (NegocioException e) {
+			UtilJSF.addWarnMessage(e.getMessage());
+		} catch (ManipulationException e) {
+			e.printStackTrace();
+			UtilJSF.addErrorMessage(e.getMessage());
+		}
 	}
 	
 	private void mensagemSaidaSalvo() {
@@ -67,7 +91,8 @@ public class ControllerCadastraSaida implements Serializable {
 	}
 	
 	private void limpar() {
-		setSaida(new Saida());
+		saida = new Saida();
+		
 		setProduto(null);
 		setLote(null);
 	}
@@ -88,10 +113,6 @@ public class ControllerCadastraSaida implements Serializable {
 		return saida;
 	}
 
-	public void setSaida(Saida saida) {
-		this.saida = saida;
-	}
-
 	public Produto getProduto() {
 		return produto;
 	}
@@ -106,6 +127,14 @@ public class ControllerCadastraSaida implements Serializable {
 
 	public void setLote(Lote lote) {
 		this.lote = lote;
+	}
+
+	public Saida getSaidaAlterar() {
+		return saidaAlterar;
+	}
+
+	public void setSaidaAlterar(Saida saidaAlterar) {
+		this.saidaAlterar = saidaAlterar;
 	}
 
 }

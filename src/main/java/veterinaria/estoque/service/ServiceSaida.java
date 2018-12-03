@@ -35,4 +35,8 @@ public class ServiceSaida implements Serializable {
 		return repositorySaida.filtrarPaginado(filterSaida);
 	}
 
+	public Saida buscarPorId(Long id) {
+		return repositorySaida.buscarPorId(id);
+	}
+
 }

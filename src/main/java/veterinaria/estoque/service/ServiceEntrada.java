@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import veterinaria.estoque.model.entidades.Entrada;
 import veterinaria.estoque.model.entidades.Lote;
+import veterinaria.estoque.model.entidades.Produto;
 import veterinaria.estoque.repository.RepositoryEntrada;
 import veterinaria.estoque.repository.filter.FilterEntrada;
 import veterinaria.estoque.util.exceptions.ManipulationException;
@@ -42,6 +43,10 @@ public class ServiceEntrada implements Serializable {
 	
 	public List<Entrada> bucarPorLote(Lote lote) {
 		return repositoryEntrada.buscarPorLote(lote);
+	}
+	
+	public Entrada buscarPorProdutoELote(Produto produto, Lote lote) {
+		return repositoryEntrada.buscarPorProdutoELote(produto, lote);
 	}
 
 }

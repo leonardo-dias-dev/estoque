@@ -12,6 +12,7 @@ import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
 import veterinaria.estoque.model.entidades.Entrada;
+import veterinaria.estoque.model.entidades.Lote;
 import veterinaria.estoque.model.entidades.Produto;
 import veterinaria.estoque.model.entidades.Usuario;
 import veterinaria.estoque.service.ServiceEntrada;
@@ -28,7 +29,7 @@ public class FilterEntrada implements Serializable {
 	
 	private Produto produto;
 	
-	private String lote;
+	private Lote lote;
 	
 	private Date dataInicial;
 	
@@ -108,11 +109,11 @@ public class FilterEntrada implements Serializable {
 		this.dataFinal = dataFinal;
 	}
 
-	public String getLote() {
+	public Lote getLote() {
 		return lote;
 	}
 
-	public void setLote(String lote) {
+	public void setLote(Lote lote) {
 		this.lote = lote;
 	}
 

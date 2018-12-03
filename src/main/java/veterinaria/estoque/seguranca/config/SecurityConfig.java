@@ -124,6 +124,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					// Saida
 					.antMatchers("/saida/consulta-saida.xhtml").authenticated()
 					.antMatchers("/saida/cadastra-saida.xhtml").authenticated()
+					
+					// Devolução
+					.antMatchers("/devolucao/consulta-devolucao.xhtml").authenticated()
+					.antMatchers("/devolucao/cadastra-devolucao.xhtml").authenticated()
 
 					// NEGADO OUTRAS URL's
 					.anyRequest().denyAll();

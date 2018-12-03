@@ -49,18 +49,48 @@ public class ServiceCadastraSaida implements Serializable {
 		serviceSaida.salvar(saida);
 	}
 	
+	@Transactional
+	public void alterar(Saida saida, Estoque estoque) throws ManipulationException {
+		estoque.setQuantidade(estoque.getQuantidade() - saida.getQuantidade());
+		
+		saida.setEstoque(estoque);
+		saida.setUsuario(usuario);
+		saida.setDataSaida(new Date());
+		
+		serviceSaida.salvar(saida);
+	}
+	
 	public Estoque validarInclusao(Saida saida, Produto produto, Lote lote) throws NegocioException {
 		Estoque estoque = serviceEstoque.buscarPorProdutoELote(produto, lote);
 		
 		if (estoque == null) {
-			throw new NegocioException("Não existe produto disponível para este lote.");
+			throw new NegocioException("Não existe produto para este lote.");
 		}
 		
-		if (estoque.getQuantidade() < saida.getQuantidade()) {
+		if (saida.getQuantidade() > estoque.getQuantidade()) {
 			throw new NegocioException("Retirada maior do que a disponível para este lote.");
 		}
 		
 		return estoque;
+	}
+	
+	public Estoque validarAlteracao(Saida saida, Saida saidaAlterar, Produto produto, Lote lote) throws NegocioException, ManipulationException {
+		Estoque estoque = validarInclusao(saida, produto, lote);
+		
+		if (!saidaAlterar.getEstoque().getId().equals(estoque.getId())) {
+			resetarEstoqueAnterior(saidaAlterar);
+		}
+		
+		return estoque;
+	}
+	
+	@Transactional
+	private void resetarEstoqueAnterior(Saida saidaAlterar) throws ManipulationException {
+		Estoque estoque = saidaAlterar.getEstoque();
+		
+		estoque.setQuantidade(estoque.getQuantidade() + saidaAlterar.getQuantidade());
+		
+		serviceEstoque.salvar(estoque);
 	}
 	
 	public List<Produto> completeProduto(String query) {

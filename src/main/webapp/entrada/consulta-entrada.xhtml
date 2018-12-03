@@ -58,8 +58,11 @@
 							<div class="ui-g" >
 								<div class="ui-g-12 ui-md-12 ui-lg-4" >
 									<p:outputLabel value="Lote" styleClass="FsLabel" />
-									<p:inputText id="campoLote" styleClass="MarTopLabel" maxlength="50"
-										value="#{controllerConsultaEntrada.filterEntrada.lote}" />
+									<p:autoComplete id="campoLote" styleClass="MarTopLabel"
+										scrollHeight="200" maxlength="50" forceSelection="true"
+										completeMethod="#{controllerConsultaEntrada.completeLote}"
+										value="#{controllerConsultaEntrada.filterEntrada.lote}"
+										var="lote" itemValue="#{lote}" itemLabel="#{lote.numero}" />
 								</div>
 								<div class="ui-g-12 ui-md-6 ui-lg-4" >
 									<p:outputLabel value="Data Inicial" styleClass="FsLabel" />
@@ -117,9 +120,8 @@
 								<p:column styleClass="TexAlCenter Wid10">
 									<p:commandLink id="iconAlterar" process="@this"
 										title="Alterar" styleClass="CommandLink"
-										action="#{controllerConsultaEntrada.alterar()}" >
+										action="#{controllerConsultaEntrada.alterar(entrada)}" >
 										<i class="icon-pencil Fs18" style="color:#1372b9" />
-										<f:setPropertyActionListener value="#{entrada}" target="#{controllerConsultaEntrada.entrada}" />
 									</p:commandLink>
 								</p:column>
 							</p:dataTable>

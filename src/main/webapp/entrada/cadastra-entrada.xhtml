@@ -85,6 +85,20 @@
 										value="#{controllerCadastraEntrada.lote.dataValidade}" />
 								</div>
 							</div>
+							
+							<p:confirmDialog id="dlgFechar" widgetVar="dialogFechar" responsive="true"
+								header="Cancelar a #{controllerCadastraEntrada.alteracao() ? 'Alteração' : 'Inclusão'} de Entrada"
+								message="Os dados inseridos nesta tela serão perdidos. Deseja realmente continuar?">
+								<div class="ui-g" >
+									<div class="ui-g-12 ui-md-6 ui-lg-6" />
+									<div class="ui-g-12 ui-md-3 ui-lg-3" >
+										<p:button value="Sim" outcome="/entrada/consulta-entrada" />
+									</div>
+									<div class="ui-g-12 ui-md-3 ui-lg-3" >
+										<p:button value="Não" onclick="PF('dialogFechar').hide(); return false;" />
+									</div>
+								</div>
+							</p:confirmDialog>
 						</h:form>
 					</div>
 				</div>

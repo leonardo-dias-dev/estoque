@@ -13,6 +13,7 @@ import javax.persistence.criteria.Root;
 
 import veterinaria.estoque.model.entidades.Entrada;
 import veterinaria.estoque.model.entidades.Lote;
+import veterinaria.estoque.model.entidades.Produto;
 import veterinaria.estoque.repository.filter.FilterEntrada;
 
 @Dependent
@@ -26,6 +27,15 @@ public class RepositoryEntrada extends AbstractRepository<Entrada, Long> impleme
 		typedQuery.setParameter("lote", lote.getNumero());
 		
 		return typedQuery.getResultList();
+	}
+	
+	public Entrada buscarPorProdutoELote(Produto produto, Lote lote) {
+		TypedQuery<Entrada> typedQuery = getEntityManager().createQuery("FROM Entrada WHERE produto = :produto AND lote = :lote", Entrada.class);
+		
+		typedQuery.setParameter("produto", produto);
+		typedQuery.setParameter("lote", lote);
+		
+		return typedQuery.getSingleResult();
 	}
 	
 	public int contarComFiltro(FilterEntrada filterEntrada) {
@@ -81,7 +91,7 @@ public class RepositoryEntrada extends AbstractRepository<Entrada, Long> impleme
 		}
 		
 		if (filterEntrada.getLote() != null) {
-			Predicate predicate = criteriaBuilder.equal(root.get("lote").get("numero"), filterEntrada.getLote());
+			Predicate predicate = criteriaBuilder.equal(root.get("lote"), filterEntrada.getLote());
 			
 			listaPredicate.add(predicate);
 		}

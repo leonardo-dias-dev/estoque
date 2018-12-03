@@ -5,10 +5,10 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 	
-	<ui:define name="titulo">Consultar Saída</ui:define>
+	<ui:define name="titulo">Consultar Devolução</ui:define>
 	
 	<ui:define name="breadcrumb">
-		<p:menuitem value="Consultar Saída" url="/saida/consulta-saida.xhtml" />
+		<p:menuitem value="Consultar Devolução" url="/devolucao/consulta-devolucao.xhtml" />
 	</ui:define>
 	
 	<ui:define name="acoesDocumento">
@@ -20,7 +20,7 @@
 					</h:outputLink>
 				</div>
 				<div class="ui-g-12 ui-md-4 ui-lg-2" >
-					<p:button value="Nova Saída" styleClass="GreenButton" outcome="/saida/cadastra-saida" />
+					<p:button value="Nova Devolução" styleClass="GreenButton" outcome="/devolucao/cadastra-devolucao" />
 				</div>
 			</div>
 		</h:form>
@@ -31,8 +31,8 @@
 			<div class="Container">
 				<div class="Responsive100">
 					<div class="Container100">
-						<h:form id="formConsultarSaida">
-							<h:outputText value="Consultar Saída" styleClass="Container100 Fs18 Fw900 MarBot1 Fleft" />
+						<h:form id="formConsultarDevolucao">
+							<h:outputText value="Consultar Devolução" styleClass="Container100 Fs18 Fw900 MarBot1 Fleft" />
 							<p:separator styleClass="Wid100" />
 							<p:messages autoUpdate="true" closable="true" />
 							
@@ -41,16 +41,16 @@
 									<p:outputLabel value="Usuário" styleClass="FsLabel" />
 									<p:autoComplete id="campoUsuario" styleClass="MarTopLabel"
 										scrollHeight="200" maxlength="255"
-										completeMethod="#{controllerConsultaSaida.completeUsuario}"
-										value="#{controllerConsultaSaida.filterSaida.usuario}"
+										completeMethod="#{controllerConsultaDevolucao.completeUsuario}"
+										value="#{controllerConsultaDevolucao.filterDevolucao.usuario}"
 										var="usuario" itemValue="#{usuario}" itemLabel="#{usuario.nome}" />
 								</div>
 								<div class="ui-g-12 ui-md-6 ui-lg-6" >
 									<p:outputLabel value="Produto" styleClass="FsLabel" />
 									<p:autoComplete id="campoProduto" styleClass="MarTopLabel"
 										scrollHeight="200" maxlength="1000" forceSelection="true"
-										completeMethod="#{controllerConsultaSaida.completeProduto}"
-										value="#{controllerConsultaSaida.filterSaida.produto}"
+										completeMethod="#{controllerConsultaDevolucao.completeProduto}"
+										value="#{controllerConsultaDevolucao.filterDevolucao.produto}"
 										var="produto" itemValue="#{produto}" itemLabel="#{produto.nome}" />
 								</div>
 							</div>
@@ -60,8 +60,8 @@
 									<p:outputLabel value="Lote" styleClass="FsLabel" />
 									<p:autoComplete id="campoLote" styleClass="MarTopLabel"
 										scrollHeight="200" maxlength="50" forceSelection="true"
-										completeMethod="#{controllerConsultaSaida.completeLote}"
-										value="#{controllerConsultaSaida.filterSaida.lote}"
+										completeMethod="#{controllerConsultaDevolucao.completeLote}"
+										value="#{controllerConsultaDevolucao.filterDevolucao.lote}"
 										var="lote" itemValue="#{lote}" itemLabel="#{lote.numero}" />
 								</div>
 								<div class="ui-g-12 ui-md-6 ui-lg-4" >
@@ -69,14 +69,14 @@
 									<div class="EmptyBox3" />
 									<p:calendar id="campoDataInicial" styleClass="MarTopLabel"
 										mask="true" showOn="false" pattern="dd/MM/yyyy"
-										value="#{controllerConsultaSaida.filterSaida.dataInicial}" />
+										value="#{controllerConsultaDevolucao.filterDevolucao.dataInicial}" />
 								</div>
 								<div class="ui-g-12 ui-md-6 ui-lg-4" >
 									<p:outputLabel value="Data Final" styleClass="FsLabel" />
 									<div class="EmptyBox3" />
 									<p:calendar id="campoDataFinal" styleClass="MarTopLabel"
 										mask="true" showOn="false" pattern="dd/MM/yyyy"
-										value="#{controllerConsultaSaida.filterSaida.dataFinal}" />
+										value="#{controllerConsultaDevolucao.filterDevolucao.dataFinal}" />
 								</div>
 							</div>
 							
@@ -84,43 +84,42 @@
 								<div class="ui-g-12 ui-md-8 ui-lg-10" />
 								<div class="ui-g-12 ui-md-4 ui-lg-2" >
 									<p:commandButton value="Filtrar" process="@form"
-										update="@form:tabelaSaida" />
+										update="@form:tabelaDevolucao" />
 								</div>
 							</div>
 							
 							<div class="EmptyBox5" />
 							
-							<p:dataTable id="tabelaSaida" emptyMessage="Nenhum registro encontrado."
-								value="#{controllerConsultaSaida.filterSaida.lazyDataModel}" var="saida"
-								rowKey="#{saida.id}" rows="10" rowsPerPageTemplate="10,20,50"
+							<p:dataTable id="tabelaDevolucao" emptyMessage="Nenhum registro encontrado."
+								value="#{controllerConsultaDevolucao.filterDevolucao.lazyDataModel}" var="devolucao"
+								rowKey="#{devolucao.id}" rows="10" rowsPerPageTemplate="10,20,50"
 								reflow="true" lazy="true" paginator="true" paginatorPosition="bottom" >
 								
 								<p:column headerText="Usuário" styleClass="TexAlCenter">
-									<h:outputText value="#{saida.usuario.nome}" />
+									<h:outputText value="#{devolucao.usuario.nome}" />
 								</p:column>
 								
 								<p:column headerText="Data Entrada" styleClass="TexAlCenter">
-									<h:outputText value="#{saida.dataSaida}" >
+									<h:outputText value="#{devolucao.dataDevolucao}" >
 										<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
 									</h:outputText>
 								</p:column>
 								
 								<p:column headerText="Produto" styleClass="TexAlCenter">
-									<h:outputText value="#{saida.estoque.produto.nome}" />
+									<h:outputText value="#{devolucao.estoque.produto.nome}" />
 								</p:column>
 								
 								<p:column headerText="Lote" styleClass="TexAlCenter">
-									<h:outputText value="#{saida.estoque.lote.numero}" />
+									<h:outputText value="#{devolucao.estoque.lote.numero}" />
 								</p:column>
 								
 								<p:column headerText="Quantidade" styleClass="TexAlCenter">
-									<h:outputText value="#{saida.quantidade}" />
+									<h:outputText value="#{devolucao.quantidade}" />
 								</p:column>
 								
 								<p:column styleClass="TexAlCenter Wid10">
 									<p:commandLink id="iconAlterar" process="@this"
-										title="Alterar" styleClass="CommandLink"
-										action="#{controllerConsultaSaida.alterar(saida)}" >
+										title="Alterar" styleClass="CommandLink" >
 										<i class="icon-pencil Fs18" style="color:#1372b9" />
 									</p:commandLink>
 								</p:column>

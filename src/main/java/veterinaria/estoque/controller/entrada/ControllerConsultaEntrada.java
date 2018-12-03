@@ -31,14 +31,12 @@ public class ControllerConsultaEntrada implements Serializable {
 	@Inject
 	private FilterEntrada filterEntrada;
 	
-	private Entrada entrada;
-	
 	@PostConstruct
 	public void init() {
 		
 	}
 	
-	public void alterar() {
+	public void alterar(Entrada entrada) {
 		try {
 			String url = String.format("entrada/cadastra-entrada.xhtml?sid=%s", entrada.getId());
 			
@@ -63,14 +61,6 @@ public class ControllerConsultaEntrada implements Serializable {
 
 	public FilterEntrada getFilterEntrada() {
 		return filterEntrada;
-	}
-
-	public Entrada getEntrada() {
-		return entrada;
-	}
-
-	public void setEntrada(Entrada entrada) {
-		this.entrada = entrada;
 	}
 
 }

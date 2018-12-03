@@ -72,7 +72,7 @@ public class RepositorySaida extends AbstractRepository<Saida, Long> implements 
 		}
 		
 		if (filterSaida.getLote() != null) {
-			Predicate predicate = criteriaBuilder.equal(root.get("estoque").get("lote").get("numero"), filterSaida.getLote());
+			Predicate predicate = criteriaBuilder.equal(root.get("estoque").get("lote"), filterSaida.getLote());
 			
 			listaPredicate.add(predicate);
 		}

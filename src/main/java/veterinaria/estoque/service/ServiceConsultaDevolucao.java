@@ -11,7 +11,7 @@ import veterinaria.estoque.model.entidades.Produto;
 import veterinaria.estoque.model.entidades.Usuario;
 
 @Dependent
-public class ServiceConsultaSaida implements Serializable {
+public class ServiceConsultaDevolucao implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
