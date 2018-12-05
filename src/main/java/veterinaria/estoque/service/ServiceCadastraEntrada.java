@@ -63,10 +63,18 @@ public class ServiceCadastraEntrada implements Serializable {
 		serviceEstoque.salvar(estoque);
 	}
 	
-	public void validarAlteracao(Entrada entrada) throws NegocioException {
-		List<Entrada> listaEntrada = serviceEntrada.bucarPorLote(entrada.getLote());
+	public void validarInclusao(Entrada entrada) throws NegocioException {
+		boolean existeEntradaPorLote = serviceEntrada.existeEntradaPorLote(entrada.getLote());
 		
-		if (listaEntrada.size() > 1) {
+		if (existeEntradaPorLote) {
+			throw new NegocioException("Já existe uma entrada com o mesmo número de lote.");
+		}
+	}
+	
+	public void validarAlteracao(Entrada entrada) throws NegocioException {
+		boolean existeEntradaPorLote = serviceEntrada.existeEntradaPorLote(entrada.getLote());
+		
+		if (existeEntradaPorLote) {
 			throw new NegocioException("Já existe uma entrada com o mesmo número de lote.");
 		}
 	}

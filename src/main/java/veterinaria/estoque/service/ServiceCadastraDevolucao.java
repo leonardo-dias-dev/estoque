@@ -53,8 +53,17 @@ public class ServiceCadastraDevolucao implements Serializable {
 		serviceDevolucao.salvar(devolucao);
 	}
 	
-	public void alterar() {
+	@Transactional
+	public void alterar(Devolucao devolucaoNovo, Devolucao devolucaoAlterar, Estoque estoque) throws ManipulationException {
+		estoque.setQuantidade(estoque.getQuantidade() - devolucaoAlterar.getQuantidade());
 		
+		estoque.setQuantidade(estoque.getQuantidade() + devolucaoNovo.getQuantidade());
+		
+		devolucaoNovo.setEstoque(estoque);
+		devolucaoNovo.setUsuario(usuario);
+		devolucaoNovo.setDataDevolucao(new Date());
+		
+		serviceDevolucao.salvar(devolucaoNovo);
 	}
 	
 	public Estoque validarInclusao(Devolucao devolucao, Produto produto, Lote lote) throws NegocioException {
@@ -79,6 +88,25 @@ public class ServiceCadastraDevolucao implements Serializable {
 		return estoque;
 	}
 	
+	public Estoque validarAlteracao(Devolucao devolucao, Devolucao devolucaoAlterar, Produto produto, Lote lote) throws NegocioException, ManipulationException {
+		Estoque estoque = validarInclusao(devolucao, produto, lote);
+		
+		if (!devolucaoAlterar.getEstoque().getId().equals(estoque.getId())) {
+			resetarDevolucaoAnterior(devolucaoAlterar);
+		}
+		
+		return estoque;
+	}
+	
+	@Transactional
+	private void resetarDevolucaoAnterior(Devolucao devolucaoAlterar) throws ManipulationException {
+		Estoque estoque = devolucaoAlterar.getEstoque();
+		
+		estoque.setQuantidade(estoque.getQuantidade() + devolucaoAlterar.getQuantidade());
+		
+		serviceEstoque.salvar(estoque);
+	}
+
 	public List<Lote> completeLote(String query) {
 		return serviceLote.buscarPorNumero(query);
 	}

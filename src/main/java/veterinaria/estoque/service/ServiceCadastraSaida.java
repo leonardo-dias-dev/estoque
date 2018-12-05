@@ -50,14 +50,16 @@ public class ServiceCadastraSaida implements Serializable {
 	}
 	
 	@Transactional
-	public void alterar(Saida saida, Estoque estoque) throws ManipulationException {
-		estoque.setQuantidade(estoque.getQuantidade() - saida.getQuantidade());
+	public void alterar(Saida saidaNovo, Saida saidaAlterar, Estoque estoque) throws ManipulationException {
+		estoque.setQuantidade(estoque.getQuantidade() + saidaAlterar.getQuantidade());
 		
-		saida.setEstoque(estoque);
-		saida.setUsuario(usuario);
-		saida.setDataSaida(new Date());
+		estoque.setQuantidade(estoque.getQuantidade() - saidaNovo.getQuantidade());
 		
-		serviceSaida.salvar(saida);
+		saidaNovo.setEstoque(estoque);
+		saidaNovo.setUsuario(usuario);
+		saidaNovo.setDataSaida(new Date());
+		
+		serviceSaida.salvar(saidaNovo);
 	}
 	
 	public Estoque validarInclusao(Saida saida, Produto produto, Lote lote) throws NegocioException {
@@ -75,7 +77,11 @@ public class ServiceCadastraSaida implements Serializable {
 	}
 	
 	public Estoque validarAlteracao(Saida saida, Saida saidaAlterar, Produto produto, Lote lote) throws NegocioException, ManipulationException {
-		Estoque estoque = validarInclusao(saida, produto, lote);
+		Estoque estoque = serviceEstoque.buscarPorProdutoELote(produto, lote);
+		
+		if (estoque == null) {
+			throw new NegocioException("Não existe produto para este lote.");
+		}
 		
 		if (!saidaAlterar.getEstoque().getId().equals(estoque.getId())) {
 			resetarEstoqueAnterior(saidaAlterar);

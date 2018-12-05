@@ -9,6 +9,7 @@ import javax.inject.Named;
 
 import veterinaria.estoque.model.entidades.Usuario;
 import veterinaria.estoque.service.ServiceCadastraUsuario;
+import veterinaria.estoque.util.UtilString;
 import veterinaria.estoque.util.cdi.qualifiers.QNovoUsuario;
 import veterinaria.estoque.util.exceptions.ManipulationException;
 import veterinaria.estoque.util.exceptions.NegocioException;
@@ -70,7 +71,9 @@ public class ControllerCadastraUsuario implements Serializable {
 	}
 	
 	public void configurarLogin() {
-		usuario.setLogin(usuario.getCpf());
+		String cfpSemMascara = UtilString.retiraMascara(usuario.getCpf());
+		
+		usuario.setLogin(cfpSemMascara);
 	}
 	
 	public boolean alteracao() {

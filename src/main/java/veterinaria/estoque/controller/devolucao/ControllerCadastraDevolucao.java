@@ -30,6 +30,8 @@ public class ControllerCadastraDevolucao implements Serializable {
 	@Inject
 	private Devolucao devolucao;
 	
+	private Devolucao devolucaoAlterar;
+	
 	@NotNull
 	private Produto produto;
 	
@@ -39,6 +41,15 @@ public class ControllerCadastraDevolucao implements Serializable {
 	@PostConstruct
 	public void init() {
 		
+	}
+	
+	public void prepararAlteracao() {
+		if (devolucaoAlterar != null) {
+			devolucao = devolucaoAlterar;
+			
+			setProduto(devolucaoAlterar.getEstoque().getProduto());
+			setLote(devolucaoAlterar.getEstoque().getLote());
+		}
 	}
 	
 	public void incluir() {
@@ -59,11 +70,24 @@ public class ControllerCadastraDevolucao implements Serializable {
 	}
 	
 	public void alterar() {
-		
+		try {
+			Estoque estoque = serviceCadastraDevolucao.validarAlteracao(devolucao, devolucaoAlterar, produto, lote);
+			
+			serviceCadastraDevolucao.alterar(devolucao, devolucaoAlterar, estoque);
+			
+			mostrarMensagemSucesso();
+			
+			limpar();
+		} catch (NegocioException e) {
+			UtilJSF.addWarnMessage(e.getMessage());
+		} catch (ManipulationException e) {
+			e.printStackTrace();
+			UtilJSF.addErrorMessage(e.getMessage());
+		}
 	}
 	
 	private void mostrarMensagemSucesso() {
-		UtilJSF.addInfoMessage("Saída salva com sucesso.");
+		UtilJSF.addInfoMessage("Devolução salva com sucesso.");
 	}
 	
 	public void limpar() {
@@ -102,6 +126,14 @@ public class ControllerCadastraDevolucao implements Serializable {
 
 	public void setLote(Lote lote) {
 		this.lote = lote;
+	}
+
+	public Devolucao getDevolucaoAlterar() {
+		return devolucaoAlterar;
+	}
+
+	public void setDevolucaoAlterar(Devolucao devolucaoAlterar) {
+		this.devolucaoAlterar = devolucaoAlterar;
 	}
 
 }

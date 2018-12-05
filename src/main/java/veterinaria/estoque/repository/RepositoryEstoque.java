@@ -29,6 +29,20 @@ public class RepositoryEstoque extends AbstractRepository<Estoque, Long> impleme
 		
 		return typedQuery.getSingleResult();
 	}
+	
+	public Integer contrarQuantidadePorProduto(Produto produto) {
+		CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
+		CriteriaQuery<Integer> criteriaQuery = criteriaBuilder.createQuery(Integer.class);
+		Root<Estoque> root = criteriaQuery.from(Estoque.class);
+		
+		Predicate predicate = criteriaBuilder.equal(root.get("produto"), produto);
+		
+		criteriaQuery.select(criteriaBuilder.sum(root.get("quantidade"))).where(predicate);
+		
+		TypedQuery<Integer> typedQuery = getEntityManager().createQuery(criteriaQuery);
+		
+		return typedQuery.getSingleResult();
+	}
 
 	public int contarComFiltro(FilterEstoque filterEstoque) {
 		CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();

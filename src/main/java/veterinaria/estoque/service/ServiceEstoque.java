@@ -40,5 +40,11 @@ public class ServiceEstoque implements Serializable {
 	public List<Estoque> filtrarPaginado(FilterEstoque filterEstoque) {
 		return repositoryEstoque.filtrarPaginado(filterEstoque);
 	}
+	
+	public Integer contrarQuantidadePorProduto(Produto produto) {
+		Integer quantidade = repositoryEstoque.contrarQuantidadePorProduto(produto);
+		
+		return quantidade == null ? 0 : quantidade;
+	}
 
 }

@@ -38,6 +38,22 @@ public class RepositoryEntrada extends AbstractRepository<Entrada, Long> impleme
 		return typedQuery.getSingleResult();
 	}
 	
+	public boolean existeEntradaPorLote(Lote lote) {
+		CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
+		CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
+		Root<Entrada> root = criteriaQuery.from(Entrada.class);
+		
+		Predicate predicate = criteriaBuilder.equal(root.get("lote").get("numero"), lote.getNumero());
+		
+		criteriaQuery.select(criteriaBuilder.count(root)).where(predicate);
+		
+		TypedQuery<Long> typedQuery = getEntityManager().createQuery(criteriaQuery);
+		
+		Long qtd = typedQuery.getSingleResult();
+		
+		return qtd.intValue() > 0;
+	}
+	
 	public int contarComFiltro(FilterEntrada filterEntrada) {
 		CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
 		CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);

@@ -13,6 +13,12 @@
 		<p:menuitem value="#{controllerCadastraDevolucao.alteracao() ? 'Alterar' : 'Incluir'} Devolução" url="/devolucao/cadstra-devolucao.xhtml" />
 	</ui:define>
 	
+	<f:metadata>
+		<f:viewParam name="sid" value="#{controllerCadastraDevolucao.devolucaoAlterar}" />
+		
+		<f:viewAction action="#{controllerCadastraDevolucao.prepararAlteracao()}" />
+	</f:metadata>
+	
 	<ui:define name="acoesDocumento">
 		<h:form prependId="false">
 			<div class="ui-g ui-fluid" >
@@ -46,7 +52,7 @@
 				<div class="Responsive100">
 					<div class="Container100">
 						<h:form id="formCadastraDevolucao">
-							<h:outputText value="#{controllerCadastraDevolucao.alteracao() ? 'Alterar' : 'Incluir'} Entrada" styleClass="Container100 Fs18 Fw900 MarBot1 Fleft" />
+							<h:outputText value="#{controllerCadastraDevolucao.alteracao() ? 'Alterar' : 'Incluir'} Devolução" styleClass="Container100 Fs18 Fw900 MarBot5 Fleft" />
 							<p:separator styleClass="Wid100" />
 							<p:messages autoUpdate="true" closable="true" />
 							
@@ -73,6 +79,20 @@
 										value="#{controllerCadastraDevolucao.devolucao.quantidade}" />
 								</div>
 							</div>
+							
+							<p:confirmDialog id="dlgFechar" widgetVar="dialogFechar" responsive="true"
+								header="Cancelar a #{controllerCadastraDevolucao.alteracao() ? 'Alteração' : 'Inclusão'} de Devolução"
+								message="Os dados inseridos nesta tela serão perdidos. Deseja realmente continuar?">
+								<div class="ui-g" >
+									<div class="ui-g-12 ui-md-6 ui-lg-6" />
+									<div class="ui-g-12 ui-md-3 ui-lg-3" >
+										<p:button value="Sim" outcome="/devolucao/consulta-devolucao" />
+									</div>
+									<div class="ui-g-12 ui-md-3 ui-lg-3" >
+										<p:button value="Não" onclick="PF('dialogFechar').hide(); return false;" />
+									</div>
+								</div>
+							</p:confirmDialog>
 						</h:form>
 					</div>
 				</div>

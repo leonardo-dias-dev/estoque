@@ -73,7 +73,7 @@ public class ControllerCadastraSaida implements Serializable {
 		try {
 			Estoque estoque = serviceCadastraSaida.validarAlteracao(saida, saidaAlterar, produto, lote);
 			
-			serviceCadastraSaida.alterar(saida, estoque);
+			serviceCadastraSaida.alterar(saida, saidaAlterar, estoque);
 			
 			mensagemSaidaSalvo();
 			

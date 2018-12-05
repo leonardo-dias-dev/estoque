@@ -11,7 +11,7 @@
 	
 	<ui:define name="breadcrumb">
 		<p:menuitem value="Cadastro" url="/cadastro/cadastro.xhtml" />
-		<p:menuitem value="Consultar Usuários" url="/cadastro/produto/consulta-produto.xhtml" />
+		<p:menuitem value="Consultar Produtos" url="/cadastro/produto/consulta-produto.xhtml" />
 		<p:menuitem value="#{controllerCadastraProduto.alteracao() ? 'Alterar' : 'Incluir'} Produto" url="/cadastro/produto/cadastra-produto.xhtml" />
 	</ui:define>
 	
@@ -54,7 +54,7 @@
 				<div class="Responsive100">
 					<div class="Container100">
 						<h:form id="formCadastraProduto">
-							<h:outputText value="#{controllerCadastraProduto.alteracao() ? 'Alterar' : 'Incluir'} Produto" styleClass="Container100 Fs18 Fw900 MarBot1 Fleft" />
+							<h:outputText value="#{controllerCadastraProduto.alteracao() ? 'Alterar' : 'Incluir'} Produto" styleClass="Container100 Fs18 Fw900 MarBot5 Fleft" />
 							<p:separator styleClass="Wid100" />
 							<p:messages autoUpdate="true" closable="true" />
 							

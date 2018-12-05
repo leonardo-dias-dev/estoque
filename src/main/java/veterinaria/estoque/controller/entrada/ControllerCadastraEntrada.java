@@ -49,6 +49,7 @@ public class ControllerCadastraEntrada implements Serializable {
 		try {
 			entrada.setLote(lote);
 			
+			serviceCadastraEntrada.validarInclusao(entrada);
 			serviceCadastraEntrada.incluir(entrada);
 			
 			limpar();
@@ -57,6 +58,8 @@ public class ControllerCadastraEntrada implements Serializable {
 		} catch (ManipulationException e) {
 			e.printStackTrace();
 			UtilJSF.addErrorMessage(e.getMessage());
+		} catch (NegocioException e) {
+			UtilJSF.addWarnMessage(e.getMessage());
 		}
 	}
 	

@@ -48,5 +48,9 @@ public class ServiceEntrada implements Serializable {
 	public Entrada buscarPorProdutoELote(Produto produto, Lote lote) {
 		return repositoryEntrada.buscarPorProdutoELote(produto, lote);
 	}
+	
+	public boolean existeEntradaPorLote(Lote lote) {
+		return repositoryEntrada.existeEntradaPorLote(lote);
+	}
 
 }

@@ -6,11 +6,11 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:o="http://omnifaces.org/ui">
 	
-	<ui:define name="titulo">Cadastro Produto</ui:define>
+	<ui:define name="titulo">Cadastro Entrada</ui:define>
 	
 	<ui:define name="breadcrumb">
 		<p:menuitem value="Consultar Entrada" url="/entrada/consulta-entrada.xhtml" />
-		<p:menuitem value="Incluir Entrada" url="/entrada/cadastra-entrada.xhtml" />
+		<p:menuitem value="#{controllerCadastraEntrada.alteracao() ? 'Alterar' : 'Incluir'} Entrada" url="/entrada/cadastra-entrada.xhtml" />
 	</ui:define>
 	
 	<f:metadata>
@@ -52,7 +52,7 @@
 				<div class="Responsive100">
 					<div class="Container100">
 						<h:form id="formCadastraEntrada">
-							<h:outputText value="Incluir Entrada" styleClass="Container100 Fs18 Fw900 MarBot1 Fleft" />
+							<h:outputText value="#{controllerCadastraEntrada.alteracao() ? 'Alterar' : 'Incluir'} Entrada" styleClass="Container100 Fs18 Fw900 MarBot5 Fleft" />
 							<p:separator styleClass="Wid100" />
 							<p:messages autoUpdate="true" closable="true" />
 							

@@ -144,7 +144,7 @@ public class UtilString {
 	 */
 	public static String retiraMascara(String str) {
 		StringBuffer ret, sb = new StringBuffer(str);
-		String aux, charMasc = "./-,:(){}[]%";
+		String aux, charMasc = "./-,:(){}[]%_";
 		int i, indice, caracter;
 		char c;
 		aux = str;

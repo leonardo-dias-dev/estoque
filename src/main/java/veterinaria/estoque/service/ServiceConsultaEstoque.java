@@ -16,8 +16,15 @@ public class ServiceConsultaEstoque implements Serializable {
 	@Inject
 	private ServiceProduto serviceProduto;
 	
+	@Inject
+	private ServiceEstoque serviceEstoque;
+	
 	public List<Produto> completeProduto(String query) {
 		return serviceProduto.buscarPorNome(query);
+	}
+	
+	public Integer contrarQuantidadePorProduto(Produto produto) {
+		return serviceEstoque.contrarQuantidadePorProduto(produto);
 	}
 
 }

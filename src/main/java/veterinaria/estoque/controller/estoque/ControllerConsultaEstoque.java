@@ -8,7 +8,6 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import veterinaria.estoque.model.entidades.Estoque;
 import veterinaria.estoque.model.entidades.Produto;
 import veterinaria.estoque.repository.filter.FilterProduto;
 import veterinaria.estoque.service.ServiceConsultaEstoque;
@@ -25,8 +24,6 @@ public class ControllerConsultaEstoque implements Serializable {
 	@Inject
 	private FilterProduto filterProduto;
 	
-	private int quantidade;
-	
 	@PostConstruct
 	public void init() {
 		
@@ -37,10 +34,7 @@ public class ControllerConsultaEstoque implements Serializable {
 	}
 	
 	public int carregarQuantidadeEstque(Produto produto) {
-		quantidade = 0;
-		List<Estoque> listaEstoque = produto.getListaEstoque();
-		
-		listaEstoque.stream().forEach(estoque -> quantidade = quantidade + estoque.getQuantidade());
+		int quantidade = serviceConsultaEstoque.contrarQuantidadePorProduto(produto);
 		
 		return quantidade;
 	}
