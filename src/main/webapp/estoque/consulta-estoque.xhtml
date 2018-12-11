@@ -49,12 +49,20 @@
 								rowKey="#{entrada.id}" rows="10" rowsPerPageTemplate="10,20,50"
 								reflow="true" lazy="true" paginator="true" paginatorPosition="bottom" >
 								
-								<p:column headerText="Produto" styleClass="TexAlCenter">
+								<p:column headerText="Produto" styleClass="TexAlCenter Wid70">
 									<h:outputText value="#{produto.nome}" />
 								</p:column>
 								
 								<p:column headerText="Estoque" styleClass="TexAlCenter Wid20">
 									<h:outputText value="#{controllerConsultaEstoque.carregarQuantidadeEstque(produto)}" />
+								</p:column>
+								
+								<p:column styleClass="TexAlCenter Wid10">
+									<p:link id="iconVisualizar" title="Visualizar"
+										styleClass="CommandLink" outcome="/estoque/visualizar-estoque">
+										<i class="icon-search Fs18" style="color:#1372b9" />
+										<f:param name="sid" value="#{produto.id}" />
+									</p:link>
 								</p:column>
 							</p:dataTable>
 						</h:form>

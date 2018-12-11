@@ -116,6 +116,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					
 					// Estoque
 					.antMatchers("/estoque/consulta-estoque.xhtml").authenticated()
+					.antMatchers("/estoque/visualizar-estoque.xhtml").authenticated()
 					
 					// Perfil
 					.antMatchers("/perfil/meus-dados.xhtml").authenticated()

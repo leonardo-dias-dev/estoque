@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import veterinaria.estoque.model.entidades.Lote;
 import veterinaria.estoque.repository.RepositoryLote;
+import veterinaria.estoque.repository.filter.FilterLote;
 
 @Dependent
 public class ServiceLote implements Serializable {
@@ -23,6 +24,14 @@ public class ServiceLote implements Serializable {
 	
 	public Lote buscarPorId(Long id) {
 		return repositoryLote.buscarPorId(id);
+	}
+
+	public int contarComFiltro(FilterLote filterLote) {
+		return 0;
+	}
+
+	public List<Lote> filtrarPaginado(FilterLote filterLote) {
+		return null;
 	}
 
 }

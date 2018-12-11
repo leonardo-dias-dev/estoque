@@ -1,0 +1,75 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<ui:define name="titulo">Visualizar Estoque</ui:define>
+	
+	<ui:define name="breadcrumb">
+		<p:menuitem value="Consultar Estoque" url="/estoque/consulta-estoque.xhtml" />
+		<p:menuitem value="Visualizar Estoque" url="/estoque/visualizar-estoque.xhtml" />
+	</ui:define>
+	
+	<f:metadata>
+		<f:viewParam name="sid" value="#{controllerVisualizarEstoque.produto}" />
+		
+		<f:viewAction action="#{controllerVisualizarEstoque.prepararVisualizacao()}" />
+	</f:metadata>
+	
+	<ui:define name="acoesDocumento">
+		<h:form prependIed="false">
+			<div class="ui-g ui-fluid" >
+				<div class="ui-g-12" >
+					<h:outputLink onclick="history.go(-1); return false;" title="Voltar" >
+						<i class="icon-left-big Fs25 BotaoVoltar" />
+					</h:outputLink>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+	
+	<ui:define name="content">
+		<div class="ContainerIndent ui-fluid">
+			<div class="Container">
+				<div class="Responsive100">
+					<div class="Container100">
+						<h:form id="formVisualizarEstoque">
+							<h:outputText value="Visualizar Estoque" styleClass="Container100 Fs18 Fw900 MarBot5 Fleft" />
+							<p:separator styleClass="Wid100" />
+							
+							<div class="ui-g" >
+								<div class="ui-g-12 ui-md-6 ui-lg-4" >
+									<p:outputLabel value="Nome" styleClass="Fw900" />
+									<div class="EmptyBox5" />
+									<p:outputLabel value="#{controllerVisualizarEstoque.produto.nome}" />
+								</div>
+								
+								<div class="ui-g-12 ui-md-6 ui-lg-4" >
+									<p:outputLabel value="Unidade de Medida" styleClass="Fw900" />
+									<div class="EmptyBox5" />
+									<p:outputLabel value="#{controllerVisualizarEstoque.produto.unidadeMedida.nome}" />
+								</div>
+								
+								<div class="ui-g-12 ui-md-6 ui-lg-4" >
+									<p:outputLabel value="Media" styleClass="Fw900" />
+									<div class="EmptyBox5" />
+									<p:outputLabel value="#{controllerVisualizarEstoque.produto.medida}" />
+								</div>
+							</div>
+							
+							<div class="EmptyBox15" />
+							
+							<p:tabView>
+								<p:tab title="Lotes à vencer">
+									<ui:include src="/WEB-INF/includes/estoque/lotes_a_vencer.xhtml" />
+								</p:tab>
+							</p:tabView>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

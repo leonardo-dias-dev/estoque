@@ -71,7 +71,12 @@ public class RepositoryEstoque extends AbstractRepository<Estoque, Long> impleme
 		Predicate todasCondicoes = criteriaBuilder.and(condicoesComoArray);
 		
 		criteriaQuery.where(todasCondicoes);
-		criteriaQuery.orderBy(criteriaBuilder.asc(root.get("produto").get("nome")));
+		
+		if (filterEstoque.isOrdenarPorDataValidadeLote()) {
+			criteriaQuery.orderBy(criteriaBuilder.asc(root.get("lote").get("dataValidade")));
+		} else {
+			criteriaQuery.orderBy(criteriaBuilder.asc(root.get("produto").get("nome")));
+		}
 		
 		TypedQuery<Estoque> typedQuery = getEntityManager().createQuery(criteriaQuery);
 		
@@ -83,6 +88,18 @@ public class RepositoryEstoque extends AbstractRepository<Estoque, Long> impleme
 	
 	private List<Predicate> getCondicoes(Root<Estoque> root, CriteriaBuilder criteriaBuilder, FilterEstoque filterEstoque) {
 		List<Predicate> listaPredicate = new ArrayList<>();
+		
+		if (filterEstoque.getDataValidadeLote() != null) {
+			Predicate predicate = criteriaBuilder.greaterThan(root.get("lote").get("dataValidade"), filterEstoque.getDataValidadeLote());
+			
+			listaPredicate.add(predicate);
+		}
+		
+		if (filterEstoque.isLotesComProdutos()) {
+			Predicate predicate = criteriaBuilder.greaterThan(root.get("quantidade"), 0);
+			
+			listaPredicate.add(predicate);
+		}
 		
 		if (filterEstoque.getProduto() != null) {
 			Predicate predicate = criteriaBuilder.equal(root.get("produto"), filterEstoque.getProduto());

@@ -35,7 +35,7 @@ public class Lote implements Serializable {
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_validade", nullable = false)
 	private Date dataValidade;
-
+	
 	public Lote() {
 		// TODO Auto-generated constructor stub
 	}

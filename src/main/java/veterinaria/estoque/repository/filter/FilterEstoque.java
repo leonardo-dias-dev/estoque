@@ -1,6 +1,7 @@
 package veterinaria.estoque.repository.filter;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +24,11 @@ public class FilterEstoque implements Serializable {
 	private ServiceEstoque serviceEstoque;
 	
 	private Produto produto;
+	
+	private Date dataValidadeLote;
+	
+	private boolean lotesComProdutos;
+	private boolean ordenarPorDataValidadeLote;
 	
 	private LazyDataModel<Estoque> lazyDataModel = new DataTableLazyModel();
 
@@ -91,6 +97,30 @@ public class FilterEstoque implements Serializable {
 
 	public LazyDataModel<Estoque> getLazyDataModel() {
 		return lazyDataModel;
+	}
+
+	public Date getDataValidadeLote() {
+		return dataValidadeLote;
+	}
+
+	public void setDataValidadeLote(Date dataValidadeLote) {
+		this.dataValidadeLote = dataValidadeLote;
+	}
+
+	public boolean isLotesComProdutos() {
+		return lotesComProdutos;
+	}
+
+	public void setLotesComProdutos(boolean lotesComProdutos) {
+		this.lotesComProdutos = lotesComProdutos;
+	}
+
+	public boolean isOrdenarPorDataValidadeLote() {
+		return ordenarPorDataValidadeLote;
+	}
+
+	public void setOrdenarPorDataValidadeLote(boolean ordenarPorDataValidadeLote) {
+		this.ordenarPorDataValidadeLote = ordenarPorDataValidadeLote;
 	}
 
 }

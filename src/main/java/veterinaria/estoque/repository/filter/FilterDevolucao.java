@@ -1,6 +1,7 @@
 package veterinaria.estoque.repository.filter;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -40,8 +41,10 @@ public class FilterDevolucao implements Serializable {
 	private int first;
 	private int pageSize;
 	
+	private Calendar calendar;
+	
 	public FilterDevolucao() {
-		// TODO Auto-generated constructor stub
+		this.calendar = Calendar.getInstance();
 	}
 	
 	private class DataTableLazyModel extends LazyDataModel<Devolucao> {
@@ -105,7 +108,18 @@ public class FilterDevolucao implements Serializable {
 	}
 
 	public void setDataInicial(Date dataInicial) {
-		this.dataInicial = dataInicial;
+		if (dataInicial != null) {
+			calendar.setTime(dataInicial);
+			
+			calendar.set(Calendar.HOUR_OF_DAY, 0);
+			calendar.set(Calendar.MINUTE, 0);
+			calendar.set(Calendar.SECOND, 0);
+			calendar.set(Calendar.MILLISECOND, 0);
+			
+			this.dataInicial = calendar.getTime();
+		} else {
+			this.dataInicial = dataInicial;
+		}
 	}
 
 	public Date getDataFinal() {
@@ -113,7 +127,18 @@ public class FilterDevolucao implements Serializable {
 	}
 
 	public void setDataFinal(Date dataFinal) {
-		this.dataFinal = dataFinal;
+		if (dataFinal != null) {
+			calendar.setTime(dataFinal);
+			
+			calendar.set(Calendar.HOUR_OF_DAY, 23);
+			calendar.set(Calendar.MINUTE, 59);
+			calendar.set(Calendar.SECOND, 59);
+			calendar.set(Calendar.MILLISECOND, 999);
+
+			this.dataFinal = calendar.getTime();
+		} else {
+			this.dataFinal = dataFinal;
+		}
 	}
 
 	public int getFirst() {
