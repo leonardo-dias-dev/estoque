@@ -30,4 +30,4 @@ install-libs
 
 ## Licença
 
-Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE.txt](https://github.com/leosdti/estoque/blob/master/LICENSE.txt) para detalhes.
+Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE.txt](https://github.com/leosdti/estoque/blob/master/LICENSE.txt) para mais detalhes.
