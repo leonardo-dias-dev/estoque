@@ -1,6 +1,6 @@
 # Estoque
 
-Projeto desenvolvido para gerenciamento de estoque de medicamentos. Onde é possível realizar a Entrada, Saída e Devolução de medicamentos, bem como obter a quantidade de medicamentos disponíveis no Estoque.
+Projeto desenvolvido para gerenciamento de estoque de medicamentos. Controle de Entrada, Saída e Devolução de medicamentos, bem como a quantidade de medicamentos disponíveis no Estoque.
 
 ## Pré-requisitos
 
