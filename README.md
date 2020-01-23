@@ -16,16 +16,8 @@ Para realizar a configuração inicial do projeto, é necessário possuir:
 
 Com as configurações iniciais feitas, é necessário executar o Maven para instalar as libs que o projeto necessita.
 
-Goals
-
 ```
-clean
-```
-
-Profiles
-
-```
-install-libs
+mvn clean package -Pinstall-libs
 ```
 
 ## Licença
